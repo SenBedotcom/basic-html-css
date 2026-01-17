@@ -1,0 +1,210 @@
+/*
+  ===================================
+  Styles สำหรับ HTML Basics Page
+  ===================================
+*/
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Navigation */
+nav {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  display: block;
+  padding: 15px 25px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #667eea;
+  color: white;
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+section {
+  background-color: white;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  color: #667eea;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+article {
+  margin-bottom: 30px;
+}
+
+article h3 {
+  color: #764ba2;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/* Code Display */
+pre {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #667eea;
+  color: white;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Lists */
+ul, ol {
+  margin: 15px 0;
+  padding-left: 30px;
+}
+
+li {
+  margin: 8px 0;
+}
+
+/* Aside */
+aside {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 1200px;
+  border-radius: 8px;
+}
+
+aside h3 {
+  color: #856404;
+  margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+  background-color: #2d3748;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+}
+
+footer a {
+  color: #67a7f8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav a {
+    border-bottom: 1px solid #eee;
+  }
+
+  section {
+    padding: 20px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+}

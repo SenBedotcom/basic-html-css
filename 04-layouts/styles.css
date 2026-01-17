@@ -1,0 +1,496 @@
+/*
+  ===================================
+  Website Layouts - Stylesheet
+  ===================================
+*/
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+/* Top Navigation */
+.top-nav {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav .container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.back-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.top-nav h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Intro */
+.intro {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.intro h1 {
+  color: #667eea;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Layout Sections */
+.layout-section {
+  background: white;
+  padding: 40px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.layout-section h2 {
+  color: #667eea;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 10px;
+}
+
+.layout-section > p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+/* Layout Demo Boxes */
+.layout-demo {
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 30px 0;
+  border: 3px dashed #95a5a6;
+}
+
+/* Demo Elements */
+.demo-header {
+  background: #3498db;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.demo-nav {
+  background: #2980b9;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.demo-content {
+  background: #ecf0f1;
+  padding: 40px;
+  text-align: center;
+  border: 2px solid #bdc3c7;
+  border-radius: 5px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.demo-footer {
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* Sidebar Layouts */
+.sidebar-layout {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.demo-sidebar-left {
+  width: 200px;
+  background: #e74c3c;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+}
+
+.demo-sidebar-right {
+  width: 200px;
+  background: #9b59b6;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+}
+
+/* Three Column Layout */
+.three-col-layout {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.three-col-layout .demo-content {
+  flex: 1;
+}
+
+/* Grid Layout */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.demo-card {
+  background: #16a085;
+  color: white;
+  padding: 30px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  transition: transform 0.3s;
+}
+
+.demo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Section Demo */
+.demo-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.demo-hero small {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.demo-content-section {
+  padding: 20px 0;
+}
+
+.demo-content-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #ecf0f1;
+  padding: 40px;
+  text-align: center;
+  border: 2px solid #bdc3c7;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Masonry Layout */
+.masonry-layout {
+  column-count: 3;
+  column-gap: 15px;
+  margin: 10px 0;
+}
+
+.masonry-layout .demo-card {
+  break-inside: avoid;
+  margin-bottom: 15px;
+}
+
+/* Code Examples */
+.code-example {
+  background: #2d2d2d;
+  color: #f8f8f2;
+  padding: 25px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.code-example h4 {
+  color: #f39c12;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.code-example h4:first-child {
+  margin-top: 0;
+}
+
+.code-example pre {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.code-example code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Comparison Table */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.comparison-table thead {
+  background: #667eea;
+  color: white;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.comparison-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Tips Grid */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.tip-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tip-card h3 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.tip-card p {
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+/* Summary List */
+.summary-list {
+  list-style: none;
+  padding: 0;
+}
+
+.summary-list li {
+  padding: 15px 20px;
+  margin: 10px 0;
+  background: #f8f9fa;
+  border-left: 5px solid #667eea;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+/* Footer */
+.main-footer {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+}
+
+.main-footer p {
+  margin: 10px 0;
+}
+
+.main-footer a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.main-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .intro h1 {
+    font-size: 2rem;
+  }
+
+  .layout-section {
+    padding: 25px;
+  }
+
+  .layout-section h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Make sidebars stack on mobile */
+  .sidebar-layout,
+  .three-col-layout {
+    flex-direction: column;
+  }
+
+  .demo-sidebar-left,
+  .demo-sidebar-right {
+    width: 100%;
+  }
+
+  /* Grid becomes 2 columns */
+  .grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Masonry becomes 2 columns */
+  .masonry-layout {
+    column-count: 2;
+  }
+
+  /* Tips grid becomes 1 column */
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Table responsive */
+  .comparison-table {
+    font-size: 14px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-nav .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .intro h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  /* Grid becomes 1 column */
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Masonry becomes 1 column */
+  .masonry-layout {
+    column-count: 1;
+  }
+
+  /* Code smaller */
+  .code-example code {
+    font-size: 12px;
+  }
+}

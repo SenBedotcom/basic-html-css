@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="เรียนรู้ CSS พื้นฐานตั้งแต่เริ่มต้น">
+  <title>CSS พื้นฐาน | FE-Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <header class="main-header">
+    <h1>CSS พื้นฐาน (Cascading Style Sheets)</h1>
+    <p class="subtitle">จัดรูปแบบและออกแบบหน้าเว็บให้สวยงาม</p>
+  </header>
+
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#what-is-css">CSS คืออะไร</a></li>
+      <li><a href="#selectors">Selectors</a></li>
+      <li><a href="#box-model">Box Model</a></li>
+      <li><a href="#colors-fonts">Colors & Fonts</a></li>
+      <li><a href="#layout">Layout</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- SECTION: CSS คือะไร -->
+    <section id="what-is-css" class="content-section">
+      <h2>CSS คืออะไร?</h2>
+      
+      <article>
+        <p><strong>CSS (Cascading Style Sheets)</strong> คือภาษาที่ใช้จัดรูปแบบการแสดงผลของ HTML</p>
+        
+        <div class="info-box">
+          <h3>3 วิธีใช้ CSS</h3>
+          
+          <h4>1. Inline CSS (ไม่แนะนำ)</h4>
+          <pre><code>&lt;p style="color: red;"&gt;ข้อความสีแดง&lt;/p&gt;</code></pre>
+          
+          <h4>2. Internal CSS (ใช้ใน &lt;head&gt;)</h4>
+          <pre><code>&lt;style&gt;
+  p {
+    color: blue;
+  }
+&lt;/style&gt;</code></pre>
+          
+          <h4>3. External CSS (✅ แนะนำ)</h4>
+          <pre><code>&lt;link rel="stylesheet" href="styles.css"&gt;</code></pre>
+        </div>
+
+        <div class="example-box">
+          <h4>ตัวอย่าง CSS พื้นฐาน:</h4>
+          <pre><code>/* Comment ใน CSS */
+selector {
+  property: value;
+  property: value;
+}</code></pre>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION: Selectors -->
+    <section id="selectors" class="content-section">
+      <h2>CSS Selectors</h2>
+      
+      <article>
+        <p>Selectors ใช้เลือก HTML elements ที่ต้องการจัดรูปแบบ</p>
+
+        <div class="selector-examples">
+          <h3>1. Element Selector</h3>
+          <div class="example">
+            <code>p { color: blue; }</code>
+            <p class="demo-text">เลือกทุก &lt;p&gt; ในหน้าเว็บ</p>
+          </div>
+
+          <h3>2. Class Selector</h3>
+          <div class="example">
+            <code>.highlight { background: yellow; }</code>
+            <p class="highlight">เลือก elements ที่มี class="highlight"</p>
+          </div>
+
+          <h3>3. ID Selector</h3>
+          <div class="example">
+            <code>#unique { font-weight: bold; }</code>
+            <p id="unique">เลือก element ที่มี id="unique" (ใช้ครั้งเดียวต่อหน้า)</p>
+          </div>
+
+          <h3>4. Multiple Selectors</h3>
+          <div class="example">
+            <code>h1, h2, h3 { font-family: Arial; }</code>
+            <p>เลือกหลาย elements พร้อมกัน</p>
+          </div>
+
+          <h3>5. Descendant Selector</h3>
+          <div class="example">
+            <code>article p { color: gray; }</code>
+            <p>เลือก &lt;p&gt; ที่อยู่ใน &lt;article&gt;</p>
+          </div>
+
+          <h3>6. Child Selector</h3>
+          <div class="example">
+            <code>div > p { margin: 0; }</code>
+            <p>เลือก &lt;p&gt; ที่เป็นลูกโดยตรงของ &lt;div&gt;</p>
+          </div>
+        </div>
+
+        <table class="selector-table">
+          <thead>
+            <tr>
+              <th>Selector</th>
+              <th>Syntax</th>
+              <th>คำอธิบาย</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Universal</td>
+              <td><code>*</code></td>
+              <td>เลือกทุก elements</td>
+            </tr>
+            <tr>
+              <td>Element</td>
+              <td><code>p</code></td>
+              <td>เลือกตามชื่อแท็ก</td>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td><code>.classname</code></td>
+              <td>เลือกตาม class</td>
+            </tr>
+            <tr>
+              <td>ID</td>
+              <td><code>#idname</code></td>
+              <td>เลือกตาม id</td>
+            </tr>
+            <tr>
+              <td>Attribute</td>
+              <td><code>[type="text"]</code></td>
+              <td>เลือกตาม attribute</td>
+            </tr>
+            <tr>
+              <td>Pseudo-class</td>
+              <td><code>:hover</code></td>
+              <td>เลือกตาม state</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <!-- SECTION: Box Model -->
+    <section id="box-model" class="content-section">
+      <h2>Box Model</h2>
+      
+      <article>
+        <p>ทุก HTML element ถูกมองเป็น "กล่อง" ที่ประกอบด้วย 4 ส่วน:</p>
+        
+        <div class="box-model-demo">
+          <div class="margin-box">
+            <span class="label">Margin</span>
+            <div class="border-box">
+              <span class="label">Border</span>
+              <div class="padding-box">
+                <span class="label">Padding</span>
+                <div class="content-box">
+                  Content
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h3>องค์ประกอบของ Box Model</h3>
+          <ol>
+            <li><strong>Content</strong> - เนื้อหาจริง (text, image)</li>
+            <li><strong>Padding</strong> - ระยะห่างระหว่าง content กับ border</li>
+            <li><strong>Border</strong> - เส้นขอบรอบ element</li>
+            <li><strong>Margin</strong> - ระยะห่างระหว่าง element กับ element อื่น</li>
+          </ol>
+        </div>
+
+        <div class="example-box">
+          <h4>ตัวอย่าง CSS:</h4>
+          <pre><code>.box {
+  /* Content size */
+  width: 300px;
+  height: 200px;
+  
+  /* Padding (ด้านใน) */
+  padding: 20px;
+  /* padding: 10px 20px; (บน-ล่าง ซ้าย-ขวา) */
+  /* padding: 10px 20px 30px 40px; (บน ขวา ล่าง ซ้าย) */
+  
+  /* Border */
+  border: 2px solid #333;
+  /* border-width: 2px; */
+  /* border-style: solid; */
+  /* border-color: #333; */
+  
+  /* Margin (ด้านนอก) */
+  margin: 20px;
+  /* margin: 10px auto; (ตรงกลาง) */
+  
+  /* Box-sizing */
+  box-sizing: border-box; /* รวม padding + border ในขนาด */
+}</code></pre>
+        </div>
+
+        <div class="practical-example">
+          <h4>ตัวอย่างจริง:</h4>
+          <div class="demo-box">
+            กล่องตัวอย่างที่มี padding, border, และ margin
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION: Colors & Fonts -->
+    <section id="colors-fonts" class="content-section">
+      <h2>Colors และ Typography</h2>
+      
+      <article>
+        <h3>🎨 Colors</h3>
+        <p>CSS รองรับการกำหนดสีหลายรูปแบบ:</p>
+
+        <div class="color-examples">
+          <div class="color-box color-name">
+            <code>color: red;</code>
+            <p>Color Names</p>
+          </div>
+          <div class="color-box color-hex">
+            <code>color: #FF5733;</code>
+            <p>Hexadecimal</p>
+          </div>
+          <div class="color-box color-rgb">
+            <code>color: rgb(255, 87, 51);</code>
+            <p>RGB</p>
+          </div>
+          <div class="color-box color-rgba">
+            <code>color: rgba(255, 87, 51, 0.8);</code>
+            <p>RGBA (มี Alpha/โปร่งใส)</p>
+          </div>
+          <div class="color-box color-hsl">
+            <code>color: hsl(9, 100%, 60%);</code>
+            <p>HSL</p>
+          </div>
+        </div>
+
+        <div class="example-box">
+          <h4>ตัวอย่าง:</h4>
+          <pre><code>.element {
+  /* สีข้อความ */
+  color: #333;
+  
+  /* สีพื้นหลัง */
+  background-color: #f0f0f0;
+  
+  /* Gradient */
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  
+  /* สีพื้นหลังแบบโปร่งใส */
+  background-color: rgba(0, 0, 0, 0.5);
+}</code></pre>
+        </div>
+      </article>
+
+      <article>
+        <h3>📝 Typography (ตัวอักษร)</h3>
+        
+        <div class="typography-examples">
+          <p class="font-example-1">ตัวอย่างฟอนต์ Sans-serif</p>
+          <p class="font-example-2">ตัวอย่างฟอนต์ Serif</p>
+          <p class="font-example-3">ตัวอย่างฟอนต์ Monospace</p>
+        </div>
+
+        <div class="example-box">
+          <h4>CSS Properties สำหรับข้อความ:</h4>
+          <pre><code>.text {
+  /* ชนิดฟอนต์ */
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  
+  /* ขนาดฟอนต์ */
+  font-size: 16px; /* px, em, rem, % */
+  
+  /* น้ำหนักฟอนต์ */
+  font-weight: bold; /* normal, bold, 100-900 */
+  
+  /* สไตล์ฟอนต์ */
+  font-style: italic; /* normal, italic, oblique */
+  
+  /* ระยะห่างบรรทัด */
+  line-height: 1.6;
+  
+  /* ระยะห่างตัวอักษร */
+  letter-spacing: 1px;
+  
+  /* ระยะห่างคำ */
+  word-spacing: 2px;
+  
+  /* การจัดข้อความ */
+  text-align: center; /* left, center, right, justify */
+  
+  /* การตกแต่ง */
+  text-decoration: underline; /* none, underline, line-through */
+  
+  /* ตัวพิมพ์ใหญ่-เล็ก */
+  text-transform: uppercase; /* lowercase, uppercase, capitalize */
+  
+  /* เงา */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}</code></pre>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION: Layout -->
+    <section id="layout" class="content-section">
+      <h2>Layout</h2>
+      
+      <article>
+        <h3>Display Property</h3>
+        <p>กำหนดวิธีการแสดงผลของ element</p>
+
+        <div class="example-box">
+          <pre><code>/* Display values */
+.element {
+  display: block;        /* แสดงเป็นบล็อก (เต็มความกว้าง) */
+  display: inline;       /* แสดงในบรรทัดเดียวกัน */
+  display: inline-block; /* รวมจุดเด่นของ block + inline */
+  display: none;         /* ซ่อน element */
+  display: flex;         /* Flexbox layout */
+  display: grid;         /* Grid layout */
+}</code></pre>
+        </div>
+      </article>
+
+      <article>
+        <h3>🔄 Flexbox (Layout ยืดหยุ่น)</h3>
+        <p>Flexbox เหมาะสำหรับจัดเรียง elements ในแนวเดียว (แนวนอนหรือแนวตั้ง)</p>
+
+        <div class="flexbox-demo">
+          <div class="flex-container">
+            <div class="flex-item">Item 1</div>
+            <div class="flex-item">Item 2</div>
+            <div class="flex-item">Item 3</div>
+          </div>
+        </div>
+
+        <div class="example-box">
+          <h4>Flexbox Properties:</h4>
+          <pre><code>/* Container (Parent) */
+.flex-container {
+  display: flex;
+  
+  /* ทิศทาง */
+  flex-direction: row; /* row, column, row-reverse, column-reverse */
+  
+  /* จัดแนวนอน */
+  justify-content: center; /* flex-start, flex-end, center, space-between, space-around */
+  
+  /* จัดแนวตั้ง */
+  align-items: center; /* flex-start, flex-end, center, stretch, baseline */
+  
+  /* ห่อหลายบรรทัด */
+  flex-wrap: wrap; /* nowrap, wrap, wrap-reverse */
+  
+  /* ช่องว่าง */
+  gap: 10px;
+}
+
+/* Items (Children) */
+.flex-item {
+  /* ขยาย */
+  flex-grow: 1;
+  
+  /* หด */
+  flex-shrink: 1;
+  
+  /* ขนาดพื้นฐาน */
+  flex-basis: 200px;
+  
+  /* Shorthand */
+  flex: 1 1 200px; /* grow shrink basis */
+}</code></pre>
+        </div>
+      </article>
+
+      <article>
+        <h3>📐 Position</h3>
+        <p>กำหนดตำแหน่งของ element</p>
+
+        <div class="example-box">
+          <pre><code>.element {
+  position: static;   /* ปกติ (default) */
+  position: relative; /* เทียบกับตำแหน่งเดิม */
+  position: absolute; /* เทียบกับ parent ที่ไม่ใช่ static */
+  position: fixed;    /* เทียบกับ viewport (ติดหน้าจอ) */
+  position: sticky;   /* รวม relative + fixed */
+  
+  /* ปรับตำแหน่ง */
+  top: 10px;
+  right: 20px;
+  bottom: 30px;
+  left: 40px;
+  
+  /* ลำดับซ้อนทับ */
+  z-index: 10;
+}</code></pre>
+        </div>
+
+        <div class="position-demo">
+          <div class="relative-box">
+            Position: Relative
+            <div class="absolute-box">Absolute</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION: Responsive Design -->
+    <section id="responsive" class="content-section">
+      <h2>📱 Responsive Design</h2>
+      
+      <article>
+        <h3>Media Queries</h3>
+        <p>ปรับแต่ง CSS ตามขนาดหน้าจอ</p>
+
+        <div class="example-box">
+          <pre><code>/* Mobile First Approach */
+
+/* สำหรับทุกอุปกรณ์ */
+.container {
+  width: 100%;
+  padding: 15px;
+}
+
+/* Tablet และมากกว่า (768px ขึ้นไป) */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+    margin: 0 auto;
+  }
+}
+
+/* Desktop (1024px ขึ้นไป) */
+@media (min-width: 1024px) {
+  .container {
+    width: 960px;
+  }
+}
+
+/* Large Desktop (1280px ขึ้นไป) */
+@media (min-width: 1280px) {
+  .container {
+    width: 1200px;
+  }
+}</code></pre>
+        </div>
+
+        <div class="info-box">
+          <h4>Breakpoints ทั่วไป:</h4>
+          <ul>
+            <li>📱 Mobile: 0 - 767px</li>
+            <li>📱 Tablet: 768px - 1023px</li>
+            <li>💻 Desktop: 1024px - 1279px</li>
+            <li>🖥️ Large Desktop: 1280px+</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- SECTION: Best Practices -->
+    <section id="best-practices" class="content-section">
+      <h2>✅ CSS Best Practices</h2>
+      
+      <article>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <h3>1. จัดระเบียบโค้ด</h3>
+            <ul>
+              <li>แยกไฟล์ CSS ออกจาก HTML</li>
+              <li>จัดกลุ่ม CSS ที่เกี่ยวข้องกัน</li>
+              <li>ใช้ Comments อธิบาย</li>
+              <li>ใช้ชื่อ class ที่เข้าใจได้</li>
+            </ul>
+          </div>
+
+          <div class="tip-card">
+            <h3>2. ตั้งชื่อ Class</h3>
+            <ul>
+              <li>ใช้ lowercase และ hyphen</li>
+              <li>ชื่อควรบอกความหมาย</li>
+              <li>❌ <code>.red-text</code></li>
+              <li>✅ <code>.error-message</code></li>
+            </ul>
+          </div>
+
+          <div class="tip-card">
+            <h3>3. หลีกเลี่ยง</h3>
+            <ul>
+              <li>❌ !important (เว้นแต่จำเป็น)</li>
+              <li>❌ Inline styles</li>
+              <li>❌ ID selectors</li>
+              <li>❌ Selector ซับซ้อนเกินไป</li>
+            </ul>
+          </div>
+
+          <div class="tip-card">
+            <h3>4. Performance</h3>
+            <ul>
+              <li>✅ Minify CSS ใน Production</li>
+              <li>✅ ใช้ Shorthand properties</li>
+              <li>✅ ลบ CSS ที่ไม่ใช้</li>
+              <li>✅ ใช้ CSS Variables</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article>
+        <h3>💡 CSS Variables (Custom Properties)</h3>
+        <div class="example-box">
+          <pre><code>/* กำหนด Variables */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --font-size-base: 16px;
+  --spacing-unit: 8px;
+}
+
+/* ใช้ Variables */
+.button {
+  background-color: var(--primary-color);
+  font-size: var(--font-size-base);
+  padding: calc(var(--spacing-unit) * 2);
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+}</code></pre>
+        </div>
+      </article>
+    </section>
+
+  </main>
+
+  <aside class="sidebar">
+    <h3>📚 Resources</h3>
+    <ul>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN CSS Documentation</a></li>
+      <li><a href="https://css-tricks.com/" target="_blank">CSS-Tricks</a></li>
+      <li><a href="https://flexboxfroggy.com/" target="_blank">Flexbox Froggy (เกมเรียน Flexbox)</a></li>
+      <li><a href="https://cssgridgarden.com/" target="_blank">Grid Garden (เกมเรียน Grid)</a></li>
+    </ul>
+
+    <h3>🎨 Color Tools</h3>
+    <ul>
+      <li><a href="https://coolors.co/" target="_blank">Coolors</a></li>
+      <li><a href="https://htmlcolorcodes.com/" target="_blank">HTML Color Codes</a></li>
+    </ul>
+  </aside>
+
+  <footer class="main-footer">
+    <p>&copy; 2026 FE-Library - เรียนรู้ CSS พื้นฐาน</p>
+    <p>สร้างเพื่อการศึกษาและพัฒนาทักษะ Frontend</p>
+  </footer>
+
+</body>
+</html>

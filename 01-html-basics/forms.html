@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Forms - แบบฟอร์ม | FE-Library</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+
+    .form-container {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .radio-group,
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .radio-item,
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+
+    button,
+    input[type="submit"],
+    input[type="reset"] {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-right: 10px;
+    }
+
+    button:hover,
+    input[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    input[type="reset"] {
+      background: #6c757d;
+    }
+
+    .required {
+      color: #e74c3c;
+    }
+
+    .help-text {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    fieldset {
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    legend {
+      font-weight: 600;
+      color: #667eea;
+      padding: 0 10px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-group input {
+      flex: 1;
+    }
+
+    .example-note {
+      background: #e3f2fd;
+      padding: 15px;
+      border-left: 4px solid #2196f3;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+
+    .example-note strong {
+      color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>📝 HTML Forms - แบบฟอร์ม</h1>
+
+    <!-- Form 1: Basic Contact Form -->
+    <div class="form-container">
+      <h2>1. แบบฟอร์มติดต่อพื้นฐาน</h2>
+      
+      <form action="/submit" method="POST">
+        
+        <div class="form-group">
+          <label for="name">
+            ชื่อ-นามสกุล <span class="required">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            placeholder="กรอกชื่อ-นามสกุล"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="email">
+            อีเมล <span class="required">*</span>
+          </label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="example@email.com"
+            required
+          >
+          <p class="help-text">เราจะไม่แชร์อีเมลของคุณกับใคร</p>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">เบอร์โทรศัพท์</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            name="phone" 
+            placeholder="0XX-XXX-XXXX"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="message">
+            ข้อความ <span class="required">*</span>
+          </label>
+          <textarea 
+            id="message" 
+            name="message" 
+            placeholder="เขียนข้อความของคุณ..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit">ส่งข้อความ</button>
+        <input type="reset" value="ล้างข้อมูล">
+
+      </form>
+    </div>
+
+    <!-- Form 2: Registration Form -->
+    <div class="form-container">
+      <h2>2. แบบฟอร์มสมัครสมาชิก</h2>
+      
+      <form action="/register" method="POST">
+        
+        <fieldset>
+          <legend>ข้อมูลบัญชี</legend>
+          
+          <div class="form-group">
+            <label for="username">ชื่อผู้ใช้ <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              minlength="3"
+              maxlength="20"
+              required
+            >
+            <p class="help-text">ความยาว 3-20 ตัวอักษร</p>
+          </div>
+
+          <div class="form-group">
+            <label for="password">รหัสผ่าน <span class="required">*</span></label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              minlength="8"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">ยืนยันรหัสผ่าน <span class="required">*</span></label>
+            <input 
+              type="password" 
+              id="confirm-password" 
+              name="confirm_password" 
+              required
+            >
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>ข้อมูลส่วนตัว</legend>
+          
+          <div class="input-group">
+            <div class="form-group" style="flex: 1;">
+              <label for="first-name">ชื่อจริง <span class="required">*</span></label>
+              <input type="text" id="first-name" name="first_name" required>
+            </div>
+
+            <div class="form-group" style="flex: 1;">
+              <label for="last-name">นามสกุล <span class="required">*</span></label>
+              <input type="text" id="last-name" name="last_name" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="birthdate">วันเกิด</label>
+            <input type="date" id="birthdate" name="birthdate">
+          </div>
+
+          <div class="form-group">
+            <label>เพศ</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">ชาย</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">หญิง</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">อื่นๆ</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="country">ประเทศ</label>
+            <select id="country" name="country">
+              <option value="">-- เลือกประเทศ --</option>
+              <option value="th">ไทย</option>
+              <option value="us">สหรัฐอเมริกา</option>
+              <option value="jp">ญี่ปุ่น</option>
+              <option value="kr">เกาหลีใต้</option>
+              <option value="sg">สิงคโปร์</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>ความสนใจ</legend>
+          
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="coding" name="interests" value="coding">
+              <label for="coding">การเขียนโปรแกรม</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="design" name="interests" value="design">
+              <label for="design">การออกแบบ</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="music" name="interests" value="music">
+              <label for="music">ดนตรี</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="sports" name="interests" value="sports">
+              <label for="sports">กีฬา</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">
+              ฉันยอมรับ <a href="#">ข้อกำหนดและเงื่อนไข</a> 
+              <span class="required">*</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit">สมัครสมาชิก</button>
+        <input type="reset" value="ล้างข้อมูล">
+
+      </form>
+    </div>
+
+    <!-- Form 3: Advanced Inputs -->
+    <div class="form-container">
+      <h2>3. Input Types ต่างๆ</h2>
+      
+      <form>
+        
+        <div class="form-group">
+          <label for="search">Search (ค้นหา)</label>
+          <input type="search" id="search" name="search" placeholder="ค้นหา...">
+        </div>
+
+        <div class="form-group">
+          <label for="url">URL</label>
+          <input type="url" id="url" name="url" placeholder="https://example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="number">Number (ตัวเลข)</label>
+          <input type="number" id="number" name="number" min="0" max="100" step="5" value="0">
+        </div>
+
+        <div class="form-group">
+          <label for="range">Range (แถบเลื่อน)</label>
+          <input type="range" id="range" name="range" min="0" max="100" value="50">
+        </div>
+
+        <div class="form-group">
+          <label for="color">Color (เลือกสี)</label>
+          <input type="color" id="color" name="color" value="#667eea">
+        </div>
+
+        <div class="input-group">
+          <div class="form-group" style="flex: 1;">
+            <label for="date">Date (วันที่)</label>
+            <input type="date" id="date" name="date">
+          </div>
+
+          <div class="form-group" style="flex: 1;">
+            <label for="time">Time (เวลา)</label>
+            <input type="time" id="time" name="time">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="file">File (อัปโหลดไฟล์)</label>
+          <input type="file" id="file" name="file" accept="image/*,.pdf">
+        </div>
+
+        <div class="form-group">
+          <label for="datalist-input">Datalist (คำแนะนำ)</label>
+          <input list="browsers" id="datalist-input" name="browser" placeholder="เลือกหรือพิมพ์...">
+          <datalist id="browsers">
+            <option value="Chrome">
+            <option value="Firefox">
+            <option value="Safari">
+            <option value="Edge">
+            <option value="Opera">
+          </datalist>
+        </div>
+
+        <button type="submit">ส่งข้อมูล</button>
+
+      </form>
+    </div>
+
+    <!-- Form Attributes Reference -->
+    <div class="form-container">
+      <h2>📚 Form Attributes ที่สำคัญ</h2>
+      
+      <div class="example-note">
+        <strong>Form Attributes:</strong>
+        <ul style="margin-top: 10px; padding-left: 20px;">
+          <li><code>action</code> - URL ที่จะส่งข้อมูลไป</li>
+          <li><code>method</code> - GET หรือ POST</li>
+          <li><code>enctype</code> - รูปแบบการเข้ารหัส (สำหรับอัปโหลดไฟล์: multipart/form-data)</li>
+        </ul>
+      </div>
+
+      <div class="example-note">
+        <strong>Input Attributes:</strong>
+        <ul style="margin-top: 10px; padding-left: 20px;">
+          <li><code>required</code> - ฟิลด์บังคับกรอก</li>
+          <li><code>placeholder</code> - ข้อความแนะนำ</li>
+          <li><code>disabled</code> - ปิดการใช้งาน</li>
+          <li><code>readonly</code> - อ่านอย่างเดียว</li>
+          <li><code>minlength / maxlength</code> - ความยาวข้อความ</li>
+          <li><code>min / max</code> - ค่าต่ำสุด/สูงสุด (สำหรับตัวเลข)</li>
+          <li><code>pattern</code> - Regular expression สำหรับตรวจสอบ</li>
+          <li><code>autocomplete</code> - เปิด/ปิดการกรอกอัตโนมัติ</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // แสดงค่าจาก range input
+    const rangeInput = document.getElementById('range');
+    rangeInput.addEventListener('input', (e) => {
+      console.log('Range value:', e.target.value);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Layouts - รูปแบบการจัดหน้าเว็บ | FE-Library</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <div class="top-nav">
+    <div class="container">
+      <a href="../index.html" class="back-link">← กลับหน้าหลัก</a>
+      <h1>📐 Website Layouts</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <header class="intro">
+      <h1>รูปแบบการจัดหน้าเว็บ (Website Layouts)</h1>
+      <p class="subtitle">เรียนรู้ Layout Patterns ที่ใช้บ่อยในการสร้างเว็บไซต์</p>
+    </header>
+
+    <!-- Layout 1: Basic Layout -->
+    <section class="layout-section">
+      <h2>1. Basic Layout (พื้นฐาน)</h2>
+      <p>Layout ง่ายที่สุด มี Header - Content - Footer</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="demo-content">Content</div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>HTML:</h4>
+        <pre><code>&lt;header&gt;Header&lt;/header&gt;
+&lt;main&gt;Content&lt;/main&gt;
+&lt;footer&gt;Footer&lt;/footer&gt;</code></pre>
+
+        <h4>CSS:</h4>
+        <pre><code>header {
+  background: #3498db;
+  padding: 20px;
+}
+
+main {
+  min-height: 400px;
+  padding: 20px;
+}
+
+footer {
+  background: #2c3e50;
+  padding: 20px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 2: Header + Nav + Content + Footer -->
+    <section class="layout-section">
+      <h2>2. Header with Navigation</h2>
+      <p>เพิ่ม Navigation Bar ระหว่าง Header กับ Content</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="demo-nav">Navigation</div>
+        <div class="demo-content">Content</div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>HTML:</h4>
+        <pre><code>&lt;header&gt;Header&lt;/header&gt;
+&lt;nav&gt;Navigation&lt;/nav&gt;
+&lt;main&gt;Content&lt;/main&gt;
+&lt;footer&gt;Footer&lt;/footer&gt;</code></pre>
+
+        <h4>CSS:</h4>
+        <pre><code>header {
+  background: #3498db;
+  padding: 20px;
+}
+
+nav {
+  background: #2980b9;
+  padding: 15px;
+}
+
+main {
+  min-height: 400px;
+  padding: 20px;
+}
+
+footer {
+  background: #2c3e50;
+  padding: 20px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 3: Sidebar Left -->
+    <section class="layout-section">
+      <h2>3. Sidebar Left Layout</h2>
+      <p>มี Sidebar ทางซ้าย เหมาะสำหรับ Dashboard, Admin Panel</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="sidebar-layout">
+          <div class="demo-sidebar-left">Sidebar</div>
+          <div class="demo-content">Content</div>
+        </div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>HTML:</h4>
+        <pre><code>&lt;header&gt;Header&lt;/header&gt;
+&lt;div class="main-layout"&gt;
+  &lt;aside&gt;Sidebar&lt;/aside&gt;
+  &lt;main&gt;Content&lt;/main&gt;
+&lt;/div&gt;
+&lt;footer&gt;Footer&lt;/footer&gt;</code></pre>
+
+        <h4>CSS (Flexbox):</h4>
+        <pre><code>.main-layout {
+  display: flex;
+  gap: 20px;
+}
+
+aside {
+  width: 250px;
+  background: #e74c3c;
+  padding: 20px;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 4: Sidebar Right -->
+    <section class="layout-section">
+      <h2>4. Sidebar Right Layout</h2>
+      <p>มี Sidebar ทางขวา เหมาะสำหรับ Blog, News</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="sidebar-layout">
+          <div class="demo-content">Content</div>
+          <div class="demo-sidebar-right">Sidebar</div>
+        </div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>HTML:</h4>
+        <pre><code>&lt;header&gt;Header&lt;/header&gt;
+&lt;div class="main-layout"&gt;
+  &lt;main&gt;Content&lt;/main&gt;
+  &lt;aside&gt;Sidebar&lt;/aside&gt;
+&lt;/div&gt;
+&lt;footer&gt;Footer&lt;/footer&gt;</code></pre>
+
+        <h4>CSS (Flexbox):</h4>
+        <pre><code>.main-layout {
+  display: flex;
+  gap: 20px;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+aside {
+  width: 300px;
+  background: #9b59b6;
+  padding: 20px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 5: Two Sidebars -->
+    <section class="layout-section">
+      <h2>5. Two Sidebars Layout</h2>
+      <p>มี Sidebar ทั้งซ้ายและขวา</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="three-col-layout">
+          <div class="demo-sidebar-left">Left Sidebar</div>
+          <div class="demo-content">Content</div>
+          <div class="demo-sidebar-right">Right Sidebar</div>
+        </div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>CSS (Flexbox):</h4>
+        <pre><code>.main-layout {
+  display: flex;
+  gap: 20px;
+}
+
+.sidebar-left {
+  width: 200px;
+  background: #e74c3c;
+  padding: 20px;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.sidebar-right {
+  width: 200px;
+  background: #9b59b6;
+  padding: 20px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 6: Grid Layout -->
+    <section class="layout-section">
+      <h2>6. Grid Layout (Card Grid)</h2>
+      <p>แสดงเนื้อหาแบบตาราง เหมาะสำหรับ Gallery, Products</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="grid-layout">
+          <div class="demo-card">Card 1</div>
+          <div class="demo-card">Card 2</div>
+          <div class="demo-card">Card 3</div>
+          <div class="demo-card">Card 4</div>
+          <div class="demo-card">Card 5</div>
+          <div class="demo-card">Card 6</div>
+        </div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>HTML:</h4>
+        <pre><code>&lt;main class="grid-container"&gt;
+  &lt;div class="card"&gt;Card 1&lt;/div&gt;
+  &lt;div class="card"&gt;Card 2&lt;/div&gt;
+  &lt;div class="card"&gt;Card 3&lt;/div&gt;
+  &lt;!-- ... --&gt;
+&lt;/main&gt;</code></pre>
+
+        <h4>CSS (Flexbox):</h4>
+        <pre><code>.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  flex: 1 1 calc(33.333% - 20px);
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 200px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 7: Holy Grail -->
+    <section class="layout-section">
+      <h2>7. Holy Grail Layout</h2>
+      <p>Layout สมบูรณ์: Header + Nav + 3 Columns + Footer</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="demo-nav">Navigation</div>
+        <div class="three-col-layout">
+          <div class="demo-sidebar-left">Left</div>
+          <div class="demo-content">Main Content</div>
+          <div class="demo-sidebar-right">Right</div>
+        </div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>CSS (Flexbox):</h4>
+        <pre><code>body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+}
+
+.sidebar {
+  width: 200px;
+}
+
+main {
+  flex: 1;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 8: Full Width Header -->
+    <section class="layout-section">
+      <h2>8. Full Width Hero Layout</h2>
+      <p>Header เต็มจอ (Hero Section) + Content</p>
+
+      <div class="layout-demo">
+        <div class="demo-hero">
+          Hero Section<br>
+          <small>(Full width, ใหญ่)</small>
+        </div>
+        <div class="demo-content-section">
+          <div class="demo-content-narrow">Content (จำกัดความกว้าง)</div>
+        </div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>CSS:</h4>
+        <pre><code>.hero {
+  width: 100%;
+  min-height: 500px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout 9: Masonry -->
+    <section class="layout-section">
+      <h2>9. Masonry Layout (Pinterest-style)</h2>
+      <p>Layout แบบ Pinterest - cards ความสูงไม่เท่ากัน</p>
+
+      <div class="layout-demo">
+        <div class="demo-header">Header</div>
+        <div class="masonry-layout">
+          <div class="demo-card" style="height: 120px;">Card 1</div>
+          <div class="demo-card" style="height: 180px;">Card 2</div>
+          <div class="demo-card" style="height: 150px;">Card 3</div>
+          <div class="demo-card" style="height: 200px;">Card 4</div>
+          <div class="demo-card" style="height: 140px;">Card 5</div>
+          <div class="demo-card" style="height: 160px;">Card 6</div>
+        </div>
+        <div class="demo-footer">Footer</div>
+      </div>
+
+      <div class="code-example">
+        <h4>CSS (Column Layout):</h4>
+        <pre><code>.masonry {
+  column-count: 3;
+  column-gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 8px;
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Layout Comparison -->
+    <section class="layout-section comparison">
+      <h2>📊 เปรียบเทียบ Layouts</h2>
+      
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Layout</th>
+            <th>เหมาะสำหรับ</th>
+            <th>ข้อดี</th>
+            <th>ข้อเสีย</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Basic</strong></td>
+            <td>Landing Page, เว็บง่ายๆ</td>
+            <td>เรียบง่าย ทำง่าย</td>
+            <td>จำกัด ไม่เหมาะเว็บใหญ่</td>
+          </tr>
+          <tr>
+            <td><strong>Sidebar Left</strong></td>
+            <td>Dashboard, Admin</td>
+            <td>เมนูเด่น นำทางชัด</td>
+            <td>Content แคบลง</td>
+          </tr>
+          <tr>
+            <td><strong>Sidebar Right</strong></td>
+            <td>Blog, News, Article</td>
+            <td>Content กว้าง Sidebar เสริม</td>
+            <td>Sidebar อาจมองไม่เห็น</td>
+          </tr>
+          <tr>
+            <td><strong>Grid Layout</strong></td>
+            <td>Gallery, Products, Portfolio</td>
+            <td>แสดงได้เยอะ สวย</td>
+            <td>ต้องใช้ Flexbox/Grid</td>
+          </tr>
+          <tr>
+            <td><strong>Holy Grail</strong></td>
+            <td>Portal, News Site</td>
+            <td>แสดงได้เยอะ ครบทุกส่วน</td>
+            <td>ซับซ้อน ต้องจัดดี</td>
+          </tr>
+          <tr>
+            <td><strong>Hero Layout</strong></td>
+            <td>Landing Page, Marketing</td>
+            <td>สวย โดดเด่น</td>
+            <td>ต้องมีรูปหรือ content ดี</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Tips -->
+    <section class="layout-section tips">
+      <h2>💡 Tips การเลือก Layout</h2>
+      
+      <div class="tips-grid">
+        <div class="tip-card">
+          <h3>1. ดูตาม Content</h3>
+          <p>Content เยอะ → ใช้ Sidebar หรือ Grid<br>
+          Content น้อย → ใช้ Basic หรือ Hero</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>2. ดูตาม User</h3>
+          <p>Desktop → ใช้ได้ทุก Layout<br>
+          Mobile → เลี่ยง Sidebar (ใช้ Grid แทน)</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>3. ดูตามเป้าหมาย</h3>
+          <p>ขายของ → Grid/Card<br>
+          อ่านบทความ → Sidebar Right<br>
+          Dashboard → Sidebar Left</p>
+        </div>
+
+        <div class="tip-card">
+          <h3>4. Responsive ก่อน</h3>
+          <p>คิด Mobile First<br>
+          จาก 1 column → หลาย columns<br>
+          ใช้ Flexbox wrap ได้ง่าย</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="layout-section summary">
+      <h2>📚 สรุป</h2>
+      <ul class="summary-list">
+        <li>✅ <strong>Basic Layout</strong> = ง่ายที่สุด เริ่มต้นดี</li>
+        <li>✅ <strong>Sidebar</strong> = ใช้บ่อย เหมาะ Blog/Dashboard</li>
+        <li>✅ <strong>Grid</strong> = สวย เหมาะ Products/Gallery</li>
+        <li>✅ <strong>Flexbox</strong> = Tool หลักจัด Layout</li>
+        <li>✅ <strong>Responsive</strong> = คิด Mobile First</li>
+        <li>✅ <strong>เลือกตาม Content</strong> = แต่ละ Layout เหมาะกับอะไร</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer class="main-footer">
+    <p>&copy; 2026 FE-Library - Website Layouts Guide</p>
+    <p><a href="../index.html">← กลับหน้าหลัก</a></p>
+  </footer>
+
+</body>
+</html>

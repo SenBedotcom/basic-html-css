@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Box Model - เข้าใจแบบจำลองกล่อง | FE-Library</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+
+    .section {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: #667eea;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    .box-model-diagram {
+      background: #f8f9fa;
+      padding: 40px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .margin-layer {
+      background-color: #ffd700;
+      padding: 30px;
+      text-align: center;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .border-layer {
+      background-color: #333;
+      padding: 5px;
+      position: relative;
+    }
+
+    .padding-layer {
+      background-color: #90ee90;
+      padding: 30px;
+      position: relative;
+    }
+
+    .content-layer {
+      background-color: #87ceeb;
+      padding: 40px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .label {
+      position: absolute;
+      font-size: 14px;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 2px solid #333;
+    }
+
+    .margin-label {
+      top: 5px;
+      left: 5px;
+      color: #856404;
+    }
+
+    .border-label {
+      top: 35px;
+      left: 35px;
+      color: white;
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .padding-label {
+      top: 50px;
+      left: 50px;
+      color: #155724;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 30px 0;
+    }
+
+    .example-box {
+      border: 3px solid #333;
+      padding: 30px;
+      background-color: #e3f2fd;
+      text-align: center;
+      font-weight: bold;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .example-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .box1 {
+      margin: 20px;
+    }
+
+    .box2 {
+      padding: 40px;
+    }
+
+    .box3 {
+      border: 10px solid #e74c3c;
+    }
+
+    .box4 {
+      margin: 30px;
+      padding: 30px;
+      border: 5px dashed #3498db;
+    }
+
+    .code-block {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 20px 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .comparison-item {
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .content-box-demo {
+      background: #fff3cd;
+      border: 10px solid #856404;
+      padding: 20px;
+      width: 300px;
+      box-sizing: content-box;
+    }
+
+    .border-box-demo {
+      background: #d1ecf1;
+      border: 10px solid #0c5460;
+      padding: 20px;
+      width: 300px;
+      box-sizing: border-box;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border-left: 5px solid #2196f3;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .warning-box {
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>📦 CSS Box Model</h1>
+
+    <!-- Section 1: What is Box Model -->
+    <div class="section">
+      <h2>Box Model คืออะไร?</h2>
+      <p>
+        ใน CSS ทุก HTML element จะถูกมองเป็น "กล่อง" (Box) ที่ประกอบไปด้วย 4 ส่วน:
+      </p>
+
+      <div class="box-model-diagram">
+        <div class="margin-layer">
+          <span class="label margin-label">Margin (ระยะห่างภายนอก)</span>
+          <div class="border-layer">
+            <span class="label border-label">Border (เส้นขอบ)</span>
+            <div class="padding-layer">
+              <span class="label padding-label">Padding (ระยะห่างภายใน)</span>
+              <div class="content-layer">
+                Content<br>(เนื้อหา)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ol style="margin: 20px 0; padding-left: 30px; line-height: 2;">
+        <li><strong>Content</strong> - เนื้อหาจริงของ element (ข้อความ, รูปภาพ, ฯลฯ)</li>
+        <li><strong>Padding</strong> - ระยะห่างระหว่าง content กับ border (ภายใน)</li>
+        <li><strong>Border</strong> - เส้นขอบรอบ element</li>
+        <li><strong>Margin</strong> - ระยะห่างระหว่าง element กับ element อื่นๆ (ภายนอก)</li>
+      </ol>
+    </div>
+
+    <!-- Section 2: Examples -->
+    <div class="section">
+      <h2>ตัวอย่าง Box Model</h2>
+
+      <div class="examples-grid">
+        <div>
+          <h3>Box 1: Margin</h3>
+          <div style="background: #f0f0f0; padding: 10px;">
+            <div class="example-box box1">
+              margin: 20px
+            </div>
+          </div>
+          <div class="code-block">.box {
+  margin: 20px;
+}</div>
+        </div>
+
+        <div>
+          <h3>Box 2: Padding</h3>
+          <div style="background: #f0f0f0; padding: 10px;">
+            <div class="example-box box2">
+              padding: 40px
+            </div>
+          </div>
+          <div class="code-block">.box {
+  padding: 40px;
+}</div>
+        </div>
+
+        <div>
+          <h3>Box 3: Border</h3>
+          <div style="background: #f0f0f0; padding: 10px;">
+            <div class="example-box box3">
+              border: 10px solid
+            </div>
+          </div>
+          <div class="code-block">.box {
+  border: 10px solid #e74c3c;
+}</div>
+        </div>
+
+        <div>
+          <h3>Box 4: All Combined</h3>
+          <div style="background: #f0f0f0; padding: 10px;">
+            <div class="example-box box4">
+              margin + padding + border
+            </div>
+          </div>
+          <div class="code-block">.box {
+  margin: 30px;
+  padding: 30px;
+  border: 5px dashed #3498db;
+}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Shorthand -->
+    <div class="section">
+      <h2>Shorthand Properties (เขียนสั้น)</h2>
+
+      <div class="info-box">
+        <h3>1 ค่า - ใช้กับทุกด้าน</h3>
+        <div class="code-block">margin: 20px;  /* บน ขวา ล่าง ซ้าย = 20px ทั้งหมด */</div>
+      </div>
+
+      <div class="info-box">
+        <h3>2 ค่า - บน-ล่าง | ซ้าย-ขวา</h3>
+        <div class="code-block">padding: 10px 20px;  /* บน-ล่าง: 10px, ซ้าย-ขวา: 20px */</div>
+      </div>
+
+      <div class="info-box">
+        <h3>3 ค่า - บน | ซ้าย-ขวา | ล่าง</h3>
+        <div class="code-block">margin: 10px 20px 30px;  /* บน: 10px, ซ้าย-ขวา: 20px, ล่าง: 30px */</div>
+      </div>
+
+      <div class="info-box">
+        <h3>4 ค่า - บน | ขวา | ล่าง | ซ้าย (ตามเข็มนาฬิกา)</h3>
+        <div class="code-block">padding: 10px 20px 30px 40px;  /* บน ขวา ล่าง ซ้าย */</div>
+      </div>
+
+      <div class="warning-box">
+        <strong>💡 เคล็ดลับจำ:</strong> เริ่มจาก <strong>บน</strong> แล้ววนตามเข็มนาฬิกา → ขวา → ล่าง → ซ้าย
+      </div>
+    </div>
+
+    <!-- Section 4: box-sizing -->
+    <div class="section">
+      <h2>box-sizing: การคำนวณขนาด</h2>
+
+      <p style="margin-bottom: 20px;">
+        <code>box-sizing</code> กำหนดว่าจะคำนวณ width และ height ยังไง
+      </p>
+
+      <div class="comparison">
+        <div class="comparison-item" style="background: #fff3cd;">
+          <h3>content-box (default)</h3>
+          <div class="content-box-demo">
+            width = 300px<br>
+            + padding: 20px (ซ้าย-ขวา = 40px)<br>
+            + border: 10px (ซ้าย-ขวา = 20px)<br>
+            <hr>
+            <strong>รวม = 360px</strong>
+          </div>
+          <div class="code-block" style="margin-top: 20px; text-align: left;">box-sizing: content-box;
+width: 300px;
+padding: 20px;
+border: 10px solid;
+
+/* ขนาดจริง = 360px */</div>
+        </div>
+
+        <div class="comparison-item" style="background: #d1ecf1;">
+          <h3>border-box (แนะนำ)</h3>
+          <div class="border-box-demo">
+            width รวม padding + border<br>
+            = 300px<br>
+            <br>
+            <hr>
+            <strong>รวม = 300px</strong>
+          </div>
+          <div class="code-block" style="margin-top: 20px; text-align: left;">box-sizing: border-box;
+width: 300px;
+padding: 20px;
+border: 10px solid;
+
+/* ขนาดจริง = 300px */</div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Best Practice:</strong> ใช้ <code>box-sizing: border-box;</code> เพื่อให้คำนวณขนาดง่ายขึ้น
+        <div class="code-block">/* ใส่ไว้ในทุกโปรเจกต์ */
+* {
+  box-sizing: border-box;
+}</div>
+      </div>
+    </div>
+
+    <!-- Section 5: Margin Tricks -->
+    <div class="section">
+      <h2>🎯 Margin Tricks</h2>
+
+      <div class="info-box">
+        <h3>จัดตรงกลาง (Center) ด้วย Auto</h3>
+        <div class="code-block">.center-box {
+  width: 500px;
+  margin: 0 auto;  /* ซ้าย-ขวา: auto = จัดกึ่งกลาง */
+}</div>
+        <div style="background: #f0f0f0; padding: 20px; margin-top: 15px;">
+          <div style="width: 300px; margin: 0 auto; background: #667eea; color: white; padding: 20px; text-align: center; border-radius: 8px; font-weight: bold;">
+            Centered Box
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3>Margin Collapse (การทับซ้อน)</h3>
+        <p>Margin แนวตั้งของ 2 elements จะรวมกัน โดยเลือกค่าที่มากกว่า</p>
+        <div class="code-block">.box1 {
+  margin-bottom: 30px;
+}
+
+.box2 {
+  margin-top: 20px;
+}
+
+/* ระยะห่างจริง = 30px (ไม่ใช่ 50px) */</div>
+      </div>
+
+      <div class="warning-box">
+        <strong>⚠️ หมายเหตุ:</strong>
+        <ul style="margin-top: 10px; padding-left: 20px;">
+          <li>Margin collapse เกิดกับ margin แนวตั้งเท่านั้น (top/bottom)</li>
+          <li>Margin แนวนอน (left/right) ไม่ทับซ้อนกัน</li>
+          <li>หาก parent มี padding หรือ border จะไม่เกิด collapse</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 6: Summary -->
+    <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+      <h2 style="color: white; border-bottom-color: white;">📚 สรุป Box Model</h2>
+      
+      <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 20px 0;">
+        <h3 style="color: white;">เรียงจากใน → นอก</h3>
+        <ol style="line-height: 2; font-size: 1.1rem;">
+          <li><strong>Content</strong> - เนื้อหา (กำหนดด้วย width/height)</li>
+          <li><strong>Padding</strong> - ช่องว่างภายใน (ใช้สีพื้นหลังเดียวกับ content)</li>
+          <li><strong>Border</strong> - เส้นขอบ</li>
+          <li><strong>Margin</strong> - ช่องว่างภายนอก (โปร่งใส)</li>
+        </ol>
+      </div>
+
+      <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px;">
+        <h3 style="color: white;">✅ สิ่งที่ควรจำ</h3>
+        <ul style="line-height: 2;">
+          <li>ใช้ <code>box-sizing: border-box;</code> เพื่อความสะดวก</li>
+          <li>Margin = ระยะห่าง<strong>ภายนอก</strong>, Padding = ระยะห่าง<strong>ภายใน</strong></li>
+          <li>Shorthand: 1 ค่า (ทุกด้าน), 2 ค่า (บน-ล่าง | ซ้าย-ขวา), 4 ค่า (บน-ขวา-ล่าง-ซ้าย)</li>
+          <li>ใช้ <code>margin: 0 auto;</code> เพื่อจัดกึ่งกลาง</li>
+          <li>ระวัง Margin Collapse ในแนวตั้ง</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

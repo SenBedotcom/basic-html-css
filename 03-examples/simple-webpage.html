@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ตัวอย่างหน้าเว็บที่รวม HTML และ CSS พื้นฐาน">
+  <title>ตัวอย่างเว็บไซต์สมบูรณ์ | FE-Library</title>
+  <link rel="stylesheet" href="styles/example.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="hero">
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <h2>🎨 My Portfolio</h2>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#about">เกี่ยวกับ</a></li>
+          <li><a href="#skills">ทักษะ</a></li>
+          <li><a href="#projects">โปรเจกต์</a></li>
+          <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <h1>สวัสดี ผมชื่อ <span class="highlight">นักพัฒนา Web</span></h1>
+      <p class="hero-description">Frontend Developer ที่หลงใหล HTML, CSS และ JavaScript</p>
+      <a href="#projects" class="btn btn-primary">ดูผลงาน</a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">เกี่ยวกับผม</h2>
+        <div class="about-content">
+          <div class="about-image">
+            <div class="image-placeholder">
+              👤
+            </div>
+          </div>
+          <div class="about-text">
+            <p>
+              ผมเป็น Frontend Developer ที่มีความหลงใหลในการสร้าง User Interface 
+              ที่สวยงามและใช้งานง่าย ด้วยประสบการณ์ในการทำงานกับ HTML, CSS และ JavaScript
+            </p>
+            <p>
+              ผมเชื่อว่าการออกแบบที่ดีต้องไม่เพียงแค่สวยงาม แต่ต้องใช้งานได้จริงและ
+              เข้าถึงได้สำหรับทุกคน (Accessibility)
+            </p>
+            <div class="stats">
+              <div class="stat-item">
+                <h3>3+</h3>
+                <p>ปีประสบการณ์</p>
+              </div>
+              <div class="stat-item">
+                <h3>50+</h3>
+                <p>โปรเจกต์ที่ทำ</p>
+              </div>
+              <div class="stat-item">
+                <h3>100%</h3>
+                <p>ความตั้งใจ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">ทักษะของผม</h2>
+        <div class="skills-grid">
+          
+          <div class="skill-card">
+            <div class="skill-icon">🎨</div>
+            <h3>HTML5</h3>
+            <p>Semantic HTML, Accessibility, SEO-friendly markup</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 90%;">90%</div>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">💅</div>
+            <h3>CSS3</h3>
+            <p>Flexbox, Grid, Animations, Responsive Design</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 85%;">85%</div>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">⚡</div>
+            <h3>JavaScript</h3>
+            <p>ES6+, DOM Manipulation, Async Programming</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 80%;">80%</div>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">⚛️</div>
+            <h3>React</h3>
+            <p>Components, Hooks, State Management</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%;">75%</div>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🎯</div>
+            <h3>UI/UX Design</h3>
+            <p>User-centered design, Wireframing, Prototyping</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 70%;">70%</div>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">📱</div>
+            <h3>Responsive Design</h3>
+            <p>Mobile-first approach, Cross-browser compatibility</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 88%;">88%</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title">โปรเจกต์ที่ผ่านมา</h2>
+        <div class="projects-grid">
+          
+          <article class="project-card">
+            <div class="project-image">
+              <div class="image-placeholder">🌐</div>
+            </div>
+            <div class="project-content">
+              <h3>E-Commerce Website</h3>
+              <p>เว็บไซต์ขายของออนไลน์ที่มี Shopping Cart และระบบชำระเงิน</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+              <a href="#" class="btn btn-secondary">ดูรายละเอียด</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <div class="image-placeholder">📱</div>
+            </div>
+            <div class="project-content">
+              <h3>Mobile App Landing Page</h3>
+              <p>หน้า Landing Page สำหรับแอพมือถือที่ออกแบบให้ Responsive</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">Flexbox</span>
+              </div>
+              <a href="#" class="btn btn-secondary">ดูรายละเอียด</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <div class="image-placeholder">📊</div>
+            </div>
+            <div class="project-content">
+              <h3>Dashboard Admin Panel</h3>
+              <p>หน้าแดชบอร์ดสำหรับจัดการข้อมูล พร้อมกราฟและสถิติ</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS Grid</span>
+                <span class="tag">React</span>
+              </div>
+              <a href="#" class="btn btn-secondary">ดูรายละเอียด</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">ติดต่อผม</h2>
+        <div class="contact-content">
+          
+          <div class="contact-info">
+            <h3>ช่องทางการติดต่อ</h3>
+            <div class="contact-item">
+              <span class="icon">📧</span>
+              <div>
+                <h4>Email</h4>
+                <p>developer@example.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="icon">📱</span>
+              <div>
+                <h4>โทรศัพท์</h4>
+                <p>+66 XX-XXX-XXXX</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="icon">📍</span>
+              <div>
+                <h4>ที่อยู่</h4>
+                <p>กรุงเทพมหานคร ประเทศไทย</p>
+              </div>
+            </div>
+
+            <div class="social-links">
+              <a href="#" class="social-link">GitHub</a>
+              <a href="#" class="social-link">LinkedIn</a>
+              <a href="#" class="social-link">Twitter</a>
+            </div>
+          </div>
+
+          <form class="contact-form">
+            <h3>ส่งข้อความหาผม</h3>
+            
+            <div class="form-group">
+              <label for="name">ชื่อของคุณ</label>
+              <input type="text" id="name" name="name" placeholder="กรอกชื่อของคุณ" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">อีเมล</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">ข้อความ</label>
+              <textarea id="message" name="message" rows="5" placeholder="เขียนข้อความของคุณ..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">ส่งข้อความ</button>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 My Portfolio. Made with ❤️ using HTML & CSS</p>
+      <p>Created for educational purposes - FE-Library</p>
+    </div>
+  </footer>
+
+</body>
+</html>
