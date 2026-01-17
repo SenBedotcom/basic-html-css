@@ -17,11 +17,18 @@
 - Responsive Design
 - Colors และ Typography
 
-### 3. Website Layouts ⭐ ใหม่!
+### 3. Website Layouts
 - Layout Patterns 9 แบบ
 - Visual Diagram แต่ละ Layout
 - โค้ดตัวอย่างครบทุก Pattern
 - เปรียบเทียบและ Tips การเลือก Layout
+
+### 4. Next.js Client Components ⭐ ใหม่!
+- Client Component คืออะไร
+- Server vs Client Component
+- ตัวอย่างการใช้งานจริง (Counter, Form, Timer, Todo List)
+- Interactive Demo ที่ทดลองได้เลย
+- Best Practices และ Common Patterns
 
 ## โครงสร้างโปรเจกต์
 
@@ -39,8 +46,13 @@ FE-libarly/
 ├── 03-examples/
 │   ├── simple-webpage.html
 │   └── styles/
-├── 04-layouts/          ⭐ ใหม่!
+├── 04-layouts/
 │   ├── index.html (9 Layout Patterns)
+│   └── styles.css
+├── 05-nextjs-client-components/  ⭐ ใหม่!
+│   ├── index.html (บทเรียน Client Components)
+│   ├── diagrams-guide.html (Visual Guide & Diagrams)
+│   ├── interactive-demo.html (ทดลองใช้งานจริง)
 │   └── styles.css
 └── README.md
 ```

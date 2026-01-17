@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next.js Client Components - Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Next.js Client Components</h1>
+            <p class="subtitle">เรียนรู้การใช้งาน Client Component ใน Next.js 13+</p>
+        </header>
+
+        <nav class="breadcrumb">
+            <a href="../index.html">หน้าหลัก</a> → 
+            <span>05. Next.js Client Components</span>
+        </nav>
+
+        <!-- Section 1: Introduction -->
+        <section class="content-section">
+            <h2>📚 Client Component คืออะไร?</h2>
+            <div class="info-box">
+                <p><strong>Client Component</strong> คือ Component ที่ทำงานฝั่ง Client (Browser) โดยจะถูก render และทำงานบน Browser ของผู้ใช้</p>
+                <p>ใน Next.js 13+ มี 2 ประเภทหลัก:</p>
+                <ul>
+                    <li><strong>Server Components</strong> (ค่าเริ่มต้น) - ทำงานฝั่ง Server</li>
+                    <li><strong>Client Components</strong> - ทำงานฝั่ง Browser</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2: Why Client Components -->
+        <section class="content-section">
+            <h2>🤔 ทำไมต้องใช้ Client Component?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🖱️</div>
+                    <h3>Interactivity</h3>
+                    <p>ใช้ Events เช่น onClick, onChange, onSubmit</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>State Management</h3>
+                    <p>ใช้ useState, useReducer สำหรับจัดการ State</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lifecycle Effects</h3>
+                    <p>ใช้ useEffect สำหรับ Side Effects</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Browser APIs</h3>
+                    <p>เข้าถึง localStorage, window, document</p>
+                </div>
+            </div>
+
+            <!-- Visual Diagram: Component Flow -->
+            <div class="visual-diagram">
+                <h3 style="text-align: center; margin: 30px 0 20px 0; color: #667eea;">📊 การทำงานของ Client Component</h3>
+                <svg width="100%" height="300" viewBox="0 0 800 300" style="max-width: 800px; margin: 0 auto; display: block;">
+                    <!-- Server Side -->
+                    <rect x="50" y="50" width="200" height="200" fill="#f0f4ff" stroke="#667eea" stroke-width="2" rx="10"/>
+                    <text x="150" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#667eea">Server</text>
+                    
+                    <text x="150" y="110" text-anchor="middle" font-size="14" fill="#555">1. Pre-render HTML</text>
+                    <text x="150" y="135" text-anchor="middle" font-size="14" fill="#555">2. ส่ง JS Bundle</text>
+                    <text x="150" y="160" text-anchor="middle" font-size="14" fill="#555">3. Hydration</text>
+                    
+                    <!-- Arrow -->
+                    <path d="M 250 150 L 350 150" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <text x="300" y="140" text-anchor="middle" font-size="12" fill="#667eea" font-weight="bold">ส่งไปที่</text>
+                    
+                    <!-- Client Side -->
+                    <rect x="350" y="50" width="200" height="200" fill="#fff0f0" stroke="#e74c3c" stroke-width="2" rx="10"/>
+                    <text x="450" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#e74c3c">Browser (Client)</text>
+                    
+                    <text x="450" y="110" text-anchor="middle" font-size="14" fill="#555">4. Interactive UI</text>
+                    <text x="450" y="135" text-anchor="middle" font-size="14" fill="#555">5. Event Handlers</text>
+                    <text x="450" y="160" text-anchor="middle" font-size="14" fill="#555">6. State Updates</text>
+                    <text x="450" y="185" text-anchor="middle" font-size="14" fill="#555">7. Re-render</text>
+                    
+                    <!-- User -->
+                    <circle cx="650" cy="150" r="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+                    <text x="650" y="145" text-anchor="middle" font-size="30">👤</text>
+                    <text x="650" y="175" text-anchor="middle" font-size="14" font-weight="bold" fill="#4caf50">User</text>
+                    
+                    <!-- Arrow to User -->
+                    <path d="M 550 150 L 595 150" stroke="#e74c3c" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
+                    
+                    <!-- Arrow markers -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#667eea" />
+                        </marker>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Section 3: How to Create -->
+        <section class="content-section">
+            <h2>✨ วิธีสร้าง Client Component</h2>
+            <div class="code-explanation">
+                <p>ใช้ <code class="inline-code">'use client'</code> ที่บรรทัดแรกของไฟล์:</p>
+            </div>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="filename">components/Counter.tsx</span>
+                    <span class="language">TypeScript</span>
+                </div>
+                <pre><code>'use client'
+
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Count: {count}&lt;/h2&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;
+        เพิ่ม
+      &lt;/button&gt;
+      &lt;button onClick={() => setCount(count - 1)}&gt;
+        ลด
+      &lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+            </div>
+
+            <div class="highlight-box success">
+                <strong>✅ สังเกต:</strong> บรรทัดแรกต้องมี <code class="inline-code">'use client'</code> เพื่อบอก Next.js ว่านี่คือ Client Component
+            </div>
+        </section>
+
+        <!-- Section 4: More Examples -->
+        <section class="content-section">
+            <h2>💡 ตัวอย่างการใช้งานจริง</h2>
+            
+            <!-- Visual: Counter Component Diagram -->
+            <div class="visual-diagram" style="margin-bottom: 40px;">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #667eea;">🔢 Counter Component - การทำงาน</h3>
+                <svg width="100%" height="250" viewBox="0 0 700 250" style="max-width: 700px; margin: 0 auto; display: block;">
+                    <!-- State Box -->
+                    <rect x="50" y="30" width="180" height="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="8"/>
+                    <text x="140" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#2196f3">State</text>
+                    <text x="140" y="80" text-anchor="middle" font-size="16" fill="#333">count = 0</text>
+                    <text x="140" y="100" text-anchor="middle" font-size="12" fill="#666">(useState)</text>
+                    
+                    <!-- UI Box -->
+                    <rect x="260" y="30" width="180" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="8"/>
+                    <text x="350" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#9c27b0">UI Display</text>
+                    <text x="350" y="80" text-anchor="middle" font-size="16" fill="#333">Count: 0</text>
+                    
+                    <!-- User Action Box -->
+                    <rect x="470" y="30" width="180" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="8"/>
+                    <text x="560" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#ff9800">User Action</text>
+                    <text x="560" y="80" text-anchor="middle" font-size="16" fill="#333">onClick</text>
+                    
+                    <!-- Flow Arrows -->
+                    <path d="M 230 70 L 255 70" stroke="#2196f3" stroke-width="2" marker-end="url(#arrow1)" fill="none"/>
+                    <text x="242" y="65" text-anchor="middle" font-size="11" fill="#2196f3">render</text>
+                    
+                    <path d="M 560 110 L 560 180 L 140 180 L 140 115" stroke="#ff9800" stroke-width="2" marker-end="url(#arrow2)" fill="none"/>
+                    <text x="350" y="195" text-anchor="middle" font-size="11" fill="#ff9800">setCount(count + 1)</text>
+                    
+                    <!-- New State -->
+                    <rect x="50" y="140" width="180" height="80" fill="#c8e6c9" stroke="#4caf50" stroke-width="2" rx="8" stroke-dasharray="5,5"/>
+                    <text x="140" y="165" text-anchor="middle" font-size="14" font-weight="bold" fill="#4caf50">New State</text>
+                    <text x="140" y="190" text-anchor="middle" font-size="16" fill="#333">count = 1</text>
+                    <text x="140" y="210" text-anchor="middle" font-size="12" fill="#666">Re-render!</text>
+                    
+                    <defs>
+                        <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2196f3" />
+                        </marker>
+                        <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#ff9800" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Example 1: Form -->
+            <div class="example-container">
+                <h3>ตัวอย่างที่ 1: Form Input</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="filename">components/SearchBar.tsx</span>
+                    </div>
+                    <pre><code>'use client'
+
+import { useState } from 'react'
+
+export default function SearchBar() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const handleSearch = () => {
+    console.log('ค้นหา:', searchTerm)
+    // ทำการค้นหา...
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;input 
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="ค้นหา..."
+      /&gt;
+      &lt;button onClick={handleSearch}&gt;ค้นหา&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Visual: useEffect Lifecycle -->
+            <div class="visual-diagram" style="margin: 40px 0;">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #667eea;">⚡ useEffect Lifecycle</h3>
+                <svg width="100%" height="280" viewBox="0 0 800 280" style="max-width: 800px; margin: 0 auto; display: block;">
+                    <!-- Component Mount -->
+                    <rect x="50" y="30" width="150" height="70" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="8"/>
+                    <text x="125" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#4caf50">Component Mount</text>
+                    <text x="125" y="80" text-anchor="middle" font-size="12" fill="#555">ครั้งแรก</text>
+                    
+                    <!-- useEffect Run -->
+                    <rect x="240" y="30" width="150" height="70" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="8"/>
+                    <text x="315" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#ff9800">useEffect Run</text>
+                    <text x="315" y="80" text-anchor="middle" font-size="12" fill="#555">ทำงาน</text>
+                    
+                    <!-- Dependency Check -->
+                    <rect x="430" y="30" width="150" height="70" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="8"/>
+                    <text x="505" y="50" text-anchor="middle" font-size="14" font-weight="bold" fill="#2196f3">Dependency</text>
+                    <text x="505" y="70" text-anchor="middle" font-size="14" font-weight="bold" fill="#2196f3">เปลี่ยนแปลง?</text>
+                    <text x="505" y="90" text-anchor="middle" font-size="11" fill="#555">[count]</text>
+                    
+                    <!-- Re-run Effect -->
+                    <rect x="620" y="30" width="150" height="70" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="8"/>
+                    <text x="695" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#ff9800">Re-run Effect</text>
+                    <text x="695" y="80" text-anchor="middle" font-size="12" fill="#555">ทำงานใหม่</text>
+                    
+                    <!-- Cleanup -->
+                    <rect x="300" y="180" width="200" height="70" fill="#ffebee" stroke="#f44336" stroke-width="2" rx="8"/>
+                    <text x="400" y="205" text-anchor="middle" font-size="14" font-weight="bold" fill="#f44336">Cleanup Function</text>
+                    <text x="400" y="225" text-anchor="middle" font-size="12" fill="#555">return () => {...}</text>
+                    <text x="400" y="240" text-anchor="middle" font-size="11" fill="#555">(ก่อน unmount)</text>
+                    
+                    <!-- Arrows -->
+                    <path d="M 200 65 L 235 65" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow3)" fill="none"/>
+                    <path d="M 390 65 L 425 65" stroke="#ff9800" stroke-width="2" marker-end="url(#arrow4)" fill="none"/>
+                    <path d="M 580 65 L 615 65" stroke="#2196f3" stroke-width="2" marker-end="url(#arrow5)" fill="none"/>
+                    
+                    <path d="M 505 100 L 505 130" stroke="#2196f3" stroke-width="2" fill="none"/>
+                    <text x="520" y="120" font-size="11" fill="#2196f3" font-weight="bold">Yes</text>
+                    <path d="M 505 130 L 695 130 L 695 100" stroke="#2196f3" stroke-width="2" marker-end="url(#arrow5)" fill="none"/>
+                    
+                    <path d="M 400 130 L 400 175" stroke="#f44336" stroke-width="2" marker-end="url(#arrow6)" stroke-dasharray="5,5" fill="none"/>
+                    
+                    <defs>
+                        <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
+                        </marker>
+                        <marker id="arrow4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#ff9800" />
+                        </marker>
+                        <marker id="arrow5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2196f3" />
+                        </marker>
+                        <marker id="arrow6" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#f44336" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Example 2: useEffect -->
+            <div class="example-container">
+                <h3>ตัวอย่างที่ 2: ใช้ useEffect</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="filename">components/Timer.tsx</span>
+                    </div>
+                    <pre><code>'use client'
+
+import { useState, useEffect } from 'react'
+
+export default function Timer() {
+  const [seconds, setSeconds] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prev => prev + 1)
+    }, 1000)
+
+    // Cleanup function
+    return () => clearInterval(interval)
+  }, [])
+
+  return &lt;div&gt;เวลาผ่านไป: {seconds} วินาที&lt;/div&gt;
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Visual: localStorage Flow -->
+            <div class="visual-diagram" style="margin: 40px 0;">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #667eea;">💾 localStorage Data Flow</h3>
+                <svg width="100%" height="250" viewBox="0 0 800 250" style="max-width: 800px; margin: 0 auto; display: block;">
+                    <!-- Initial Load -->
+                    <rect x="50" y="30" width="160" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="8"/>
+                    <text x="130" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#4caf50">Component Mount</text>
+                    <text x="130" y="75" text-anchor="middle" font-size="12" fill="#555">useEffect()</text>
+                    <text x="130" y="95" text-anchor="middle" font-size="11" fill="#666">[] - ครั้งแรก</text>
+                    
+                    <!-- Arrow to localStorage -->
+                    <path d="M 210 70 L 265 70" stroke="#4caf50" stroke-width="2" marker-end="url(#arrow7)" fill="none"/>
+                    <text x="237" y="60" text-anchor="middle" font-size="11" fill="#4caf50">read</text>
+                    
+                    <!-- localStorage -->
+                    <rect x="265" y="30" width="150" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="8"/>
+                    <text x="340" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#ff9800">localStorage</text>
+                    <text x="340" y="75" text-anchor="middle" font-size="12" fill="#555">Browser Storage</text>
+                    <text x="340" y="95" text-anchor="middle" font-size="11" fill="#666">key: 'theme'</text>
+                    
+                    <!-- Arrow back -->
+                    <path d="M 340 110 L 340 140 L 130 140 L 130 115" stroke="#ff9800" stroke-width="2" marker-end="url(#arrow8)" stroke-dasharray="4,4" fill="none"/>
+                    <text x="235" y="155" text-anchor="middle" font-size="11" fill="#ff9800">return value</text>
+                    
+                    <!-- User Action -->
+                    <rect x="450" y="30" width="140" height="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="8"/>
+                    <text x="520" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="#2196f3">User Click</text>
+                    <text x="520" y="75" text-anchor="middle" font-size="12" fill="#555">Toggle Theme</text>
+                    
+                    <!-- Arrow to State -->
+                    <path d="M 520 110 L 520 145" stroke="#2196f3" stroke-width="2" marker-end="url(#arrow9)" fill="none"/>
+                    <text x="540" y="130" font-size="11" fill="#2196f3">trigger</text>
+                    
+                    <!-- State Update -->
+                    <rect x="450" y="145" width="140" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="8"/>
+                    <text x="520" y="170" text-anchor="middle" font-size="14" font-weight="bold" fill="#9c27b0">setState()</text>
+                    <text x="520" y="190" text-anchor="middle" font-size="12" fill="#555">Update State</text>
+                    <text x="520" y="210" text-anchor="middle" font-size="11" fill="#666">Re-render</text>
+                    
+                    <!-- Arrow to save -->
+                    <path d="M 450 185 L 415 185 L 415 70 L 415 70" stroke="#9c27b0" stroke-width="2" marker-end="url(#arrow10)" fill="none"/>
+                    <text x="430" y="130" font-size="11" fill="#9c27b0">save</text>
+                    
+                    <!-- Result -->
+                    <rect x="630" y="80" width="140" height="60" fill="#ffebee" stroke="#f44336" stroke-width="2" rx="8"/>
+                    <text x="700" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#f44336">Persistent!</text>
+                    <text x="700" y="125" text-anchor="middle" font-size="11" fill="#555">คงอยู่หลัง Reload</text>
+                    
+                    <defs>
+                        <marker id="arrow7" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
+                        </marker>
+                        <marker id="arrow8" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#ff9800" />
+                        </marker>
+                        <marker id="arrow9" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2196f3" />
+                        </marker>
+                        <marker id="arrow10" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#9c27b0" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Example 3: Browser API -->
+            <div class="example-container">
+                <h3>ตัวอย่างที่ 3: ใช้ Browser API</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="filename">components/ThemeToggle.tsx</span>
+                    </div>
+                    <pre><code>'use client'
+
+import { useState, useEffect } from 'react'
+
+export default function ThemeToggle() {
+  const [theme, setTheme] = useState('light')
+
+  useEffect(() => {
+    // อ่านค่าจาก localStorage
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      setTheme(savedTheme)
+    }
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    // บันทึกลง localStorage
+    localStorage.setItem('theme', newTheme)
+  }
+
+  return (
+    &lt;button onClick={toggleTheme}&gt;
+      {theme === 'light' ? '🌙 โหมดกลางคืน' : '☀️ โหมดกลางวัน'}
+    &lt;/button&gt;
+  )
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Server vs Client -->
+        <section class="content-section">
+            <h2>⚖️ Server Component vs Client Component</h2>
+            
+            <!-- Visual Comparison Diagram -->
+            <div class="visual-diagram" style="margin-bottom: 30px;">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #667eea;">📊 เปรียบเทียบ Server vs Client Component</h3>
+                <svg width="100%" height="400" viewBox="0 0 900 400" style="max-width: 900px; margin: 0 auto; display: block; background: #fafafa; border-radius: 10px; padding: 20px;">
+                    
+                    <!-- Server Component Side -->
+                    <text x="220" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#667eea">Server Component</text>
+                    <rect x="40" y="60" width="360" height="320" fill="#e3f2fd" stroke="#667eea" stroke-width="3" rx="12"/>
+                    
+                    <!-- Server Icons and Text -->
+                    <text x="60" y="90" font-size="14" fill="#333">🖥️ ทำงานบน Server</text>
+                    <text x="60" y="115" font-size="14" fill="#333">✅ เข้าถึง Database ได้</text>
+                    <text x="60" y="140" font-size="14" fill="#333">✅ ใช้ Secrets/API Keys ได้</text>
+                    <text x="60" y="165" font-size="14" fill="#333">✅ Bundle Size เล็ก</text>
+                    <text x="60" y="190" font-size="14" fill="#333">✅ SEO ดี</text>
+                    <text x="60" y="215" font-size="14" fill="#333">❌ ไม่มี useState</text>
+                    <text x="60" y="240" font-size="14" fill="#333">❌ ไม่มี useEffect</text>
+                    <text x="60" y="265" font-size="14" fill="#333">❌ ไม่มี Event Handlers</text>
+                    <text x="60" y="290" font-size="14" fill="#333">❌ ไม่มี Browser APIs</text>
+                    
+                    <rect x="60" y="310" width="320" height="50" fill="#667eea" rx="8"/>
+                    <text x="220" y="340" text-anchor="middle" font-size="14" font-weight="bold" fill="white">ไม่ต้องใส่ 'use client'</text>
+                    
+                    <!-- VS Divider -->
+                    <text x="450" y="230" text-anchor="middle" font-size="24" font-weight="bold" fill="#9e9e9e">VS</text>
+                    <line x1="450" y1="60" x2="450" y2="380" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- Client Component Side -->
+                    <text x="680" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#e74c3c">Client Component</text>
+                    <rect x="500" y="60" width="360" height="320" fill="#ffebee" stroke="#e74c3c" stroke-width="3" rx="12"/>
+                    
+                    <!-- Client Icons and Text -->
+                    <text x="520" y="90" font-size="14" fill="#333">🌐 ทำงานบน Browser</text>
+                    <text x="520" y="115" font-size="14" fill="#333">✅ useState, useEffect</text>
+                    <text x="520" y="140" font-size="14" fill="#333">✅ Event Handlers</text>
+                    <text x="520" y="165" font-size="14" fill="#333">✅ Browser APIs</text>
+                    <text x="520" y="190" font-size="14" fill="#333">✅ Interactive UI</text>
+                    <text x="520" y="215" font-size="14" fill="#333">⚠️ Bundle Size ใหญ่ขึ้น</text>
+                    <text x="520" y="240" font-size="14" fill="#333">❌ ไม่เข้าถึง DB โดยตรง</text>
+                    <text x="520" y="265" font-size="14" fill="#333">❌ ไม่เก็บ Secrets ได้</text>
+                    
+                    <rect x="520" y="310" width="320" height="50" fill="#e74c3c" rx="8"/>
+                    <text x="680" y="340" text-anchor="middle" font-size="14" font-weight="bold" fill="white">ต้องใส่ 'use client'</text>
+                </svg>
+            </div>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>หัวข้อ</th>
+                            <th>Server Component</th>
+                            <th>Client Component</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>การประกาศ</strong></td>
+                            <td>ไม่ต้องใส่อะไร (ค่าเริ่มต้น)</td>
+                            <td>ใส่ <code>'use client'</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>ทำงานที่</strong></td>
+                            <td>Server</td>
+                            <td>Browser</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fetch Data</strong></td>
+                            <td>✅ ใช้ได้</td>
+                            <td>✅ ใช้ได้</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database Access</strong></td>
+                            <td>✅ เข้าถึงได้โดยตรง</td>
+                            <td>❌ ต้องผ่าน API</td>
+                        </tr>
+                        <tr>
+                            <td><strong>useState, useEffect</strong></td>
+                            <td>❌ ใช้ไม่ได้</td>
+                            <td>✅ ใช้ได้</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Event Handlers</strong></td>
+                            <td>❌ ใช้ไม่ได้</td>
+                            <td>✅ ใช้ได้</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Browser APIs</strong></td>
+                            <td>❌ ไม่มี</td>
+                            <td>✅ มี (localStorage, window)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bundle Size</strong></td>
+                            <td>✅ ไม่ส่งไป Client</td>
+                            <td>⚠️ ส่งไป Client (ใหญ่ขึ้น)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 6: Best Practices -->
+        <section class="content-section">
+            <h2>🎓 Best Practices</h2>
+            
+            <div class="practice-card">
+                <h3>✅ ควรใช้ Client Component เมื่อ:</h3>
+                <ul class="checklist">
+                    <li>ต้องการ Interactivity (onClick, onChange)</li>
+                    <li>ต้องใช้ State (useState, useReducer)</li>
+                    <li>ต้องใช้ Effects (useEffect)</li>
+                    <li>ต้องใช้ Browser APIs (localStorage, geolocation)</li>
+                    <li>ต้องใช้ Custom Hooks ที่มี State</li>
+                </ul>
+            </div>
+
+            <div class="practice-card warning">
+                <h3>⚠️ ควรใช้ Server Component เมื่อ:</h3>
+                <ul class="checklist">
+                    <li>ต้องการ Fetch Data จาก Database</li>
+                    <li>เก็บ Secrets และ API Keys</li>
+                    <li>ลด Bundle Size ที่ส่งไป Client</li>
+                    <li>แสดงเนื้อหาแบบ Static</li>
+                    <li>ต้องการ SEO ที่ดี</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 เคล็ดลับ:</strong> เริ่มด้วย Server Component ก่อนเสมอ แล้วค่อยเปลี่ยนเป็น Client Component เฉพาะส่วนที่จำเป็น
+            </div>
+        </section>
+
+        <!-- Section 7: Common Patterns -->
+        <section class="content-section">
+            <h2>🔧 Pattern ที่ใช้บ่อย</h2>
+            
+            <!-- Visual: Component Composition Pattern -->
+            <div class="visual-diagram">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #667eea;">🧩 Pattern: Server + Client Components</h3>
+                <svg width="100%" height="350" viewBox="0 0 700 350" style="max-width: 700px; margin: 0 auto; display: block;">
+                    <!-- Page (Server Component) -->
+                    <rect x="50" y="30" width="600" height="280" fill="#e3f2fd" stroke="#2196f3" stroke-width="3" rx="10"/>
+                    <text x="350" y="60" text-anchor="middle" font-size="16" font-weight="bold" fill="#2196f3">📄 Page.tsx (Server Component)</text>
+                    
+                    <!-- Server Component Content -->
+                    <rect x="80" y="80" width="540" height="60" fill="#fff" stroke="#2196f3" stroke-width="2" rx="8" stroke-dasharray="5,5"/>
+                    <text x="100" y="105" font-size="13" fill="#333">const data = await fetch('...')</text>
+                    <text x="100" y="125" font-size="13" fill="#333">// ดึงข้อมูลจาก Database หรือ API</text>
+                    
+                    <!-- Client Component 1 -->
+                    <rect x="100" y="160" width="220" height="120" fill="#ffebee" stroke="#e74c3c" stroke-width="2" rx="8"/>
+                    <text x="210" y="185" text-anchor="middle" font-size="14" font-weight="bold" fill="#e74c3c">'use client'</text>
+                    <text x="210" y="205" text-anchor="middle" font-size="13" fill="#333">Counter Component</text>
+                    <rect x="120" y="215" width="180" height="30" fill="#fff" rx="5"/>
+                    <text x="210" y="235" text-anchor="middle" font-size="12" fill="#666">useState, onClick</text>
+                    <rect x="120" y="250" width="180" height="20" fill="#4caf50" rx="5"/>
+                    <text x="210" y="263" text-anchor="middle" font-size="11" fill="white">Interactive ✨</text>
+                    
+                    <!-- Client Component 2 -->
+                    <rect x="350" y="160" width="240" height="120" fill="#ffebee" stroke="#e74c3c" stroke-width="2" rx="8"/>
+                    <text x="470" y="185" text-anchor="middle" font-size="14" font-weight="bold" fill="#e74c3c">'use client'</text>
+                    <text x="470" y="205" text-anchor="middle" font-size="13" fill="#333">Form Component</text>
+                    <rect x="370" y="215" width="200" height="30" fill="#fff" rx="5"/>
+                    <text x="470" y="235" text-anchor="middle" font-size="12" fill="#666">useState, onSubmit</text>
+                    <rect x="370" y="250" width="200" height="20" fill="#4caf50" rx="5"/>
+                    <text x="470" y="263" text-anchor="middle" font-size="11" fill="white">User Input ✨</text>
+                    
+                    <!-- Labels -->
+                    <text x="350" y="310" text-anchor="middle" font-size="13" fill="#666" font-style="italic">ส่ง data จาก Server → Client Components</text>
+                    
+                    <!-- Legend -->
+                    <rect x="50" y="325" width="15" height="15" fill="#e3f2fd" stroke="#2196f3" stroke-width="1"/>
+                    <text x="70" y="337" font-size="12" fill="#333">Server Component</text>
+                    
+                    <rect x="220" y="325" width="15" height="15" fill="#ffebee" stroke="#e74c3c" stroke-width="1"/>
+                    <text x="240" y="337" font-size="12" fill="#333">Client Component</text>
+                </svg>
+            </div>
+            
+            <div class="pattern-container">
+                <h3>Pattern 1: ผสม Server + Client Component</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="filename">app/page.tsx (Server Component)</span>
+                    </div>
+                    <pre><code>import ClientCounter from './ClientCounter'
+
+// นี่คือ Server Component (ค่าเริ่มต้น)
+export default async function Page() {
+  // Fetch data บน Server
+  const data = await fetch('...')
+  
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;My Page&lt;/h1&gt;
+      {/* ส่ง data ให้ Client Component */}
+      &lt;ClientCounter initialCount={data.count} /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="filename">app/ClientCounter.tsx (Client Component)</span>
+                    </div>
+                    <pre><code>'use client'
+
+import { useState } from 'react'
+
+export default function ClientCounter({ initialCount }) {
+  const [count, setCount] = useState(initialCount)
+  
+  return (
+    &lt;button onClick={() => setCount(count + 1)}&gt;
+      Count: {count}
+    &lt;/button&gt;
+  )
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="pattern-container">
+                <h3>Pattern 2: Client Component ที่ใช้ API Route</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="filename">components/DataFetcher.tsx</span>
+                    </div>
+                    <pre><code>'use client'
+
+import { useState, useEffect } from 'react'
+
+export default function DataFetcher() {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(data => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) return &lt;div&gt;กำลังโหลด...&lt;/div&gt;
+  
+  return &lt;div&gt;{JSON.stringify(data)}&lt;/div&gt;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Common Mistakes -->
+        <section class="content-section">
+            <h2>⚠️ ข้อผิดพลาดที่พบบ่อย</h2>
+            
+            <div class="mistake-card error">
+                <h3>❌ ผิด: ลืมใส่ 'use client'</h3>
+                <div class="code-block">
+                    <pre><code>// ❌ จะ Error!
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0) // Error: useState ต้องใช้ใน Client Component
+  return &lt;div&gt;{count}&lt;/div&gt;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="mistake-card success">
+                <h3>✅ ถูก: ใส่ 'use client' ที่บรรทัดแรก</h3>
+                <div class="code-block">
+                    <pre><code>// ✅ ถูกต้อง!
+'use client'
+
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+  return &lt;div&gt;{count}&lt;/div&gt;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="mistake-card error">
+                <h3>❌ ผิด: ใช้ Server-only Features ใน Client Component</h3>
+                <div class="code-block">
+                    <pre><code>'use client'
+
+import { prisma } from '@/lib/prisma'
+
+export default function Users() {
+  // ❌ Error: ไม่สามารถเชื่อมต่อ Database โดยตรงใน Client Component
+  const users = await prisma.user.findMany()
+  return &lt;div&gt;...&lt;/div&gt;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="mistake-card success">
+                <h3>✅ ถูก: Fetch จาก API Route แทน</h3>
+                <div class="code-block">
+                    <pre><code>'use client'
+
+import { useEffect, useState } from 'react'
+
+export default function Users() {
+  const [users, setUsers] = useState([])
+  
+  useEffect(() => {
+    // ✅ ถูกต้อง: Fetch ผ่าน API Route
+    fetch('/api/users')
+      .then(res => res.json())
+      .then(data => setUsers(data))
+  }, [])
+  
+  return &lt;div&gt;...&lt;/div&gt;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 9: Exercise -->
+        <section class="content-section exercise">
+            <h2>📝 แบบฝึกหัด</h2>
+            
+            <div class="exercise-card">
+                <h3>แบบฝึกหัดที่ 1: Todo List</h3>
+                <p>สร้าง Client Component ที่มีฟีเจอร์:</p>
+                <ul>
+                    <li>แสดงรายการ Todo</li>
+                    <li>เพิ่ม Todo ใหม่</li>
+                    <li>ลบ Todo</li>
+                    <li>ทำเครื่องหมายว่าเสร็จแล้ว</li>
+                </ul>
+                <button class="show-solution-btn" onclick="toggleSolution('solution1')">แสดงเฉลย</button>
+                <div id="solution1" class="solution" style="display: none;">
+                    <div class="code-block">
+                        <pre><code>'use client'
+
+import { useState } from 'react'
+
+export default function TodoList() {
+  const [todos, setTodos] = useState([])
+  const [input, setInput] = useState('')
+
+  const addTodo = () => {
+    if (input.trim()) {
+      setTodos([...todos, { id: Date.now(), text: input, done: false }])
+      setInput('')
+    }
+  }
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, done: !todo.done } : todo
+    ))
+  }
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;input 
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+      /&gt;
+      &lt;button onClick={addTodo}&gt;เพิ่ม&lt;/button&gt;
+      
+      &lt;ul&gt;
+        {todos.map(todo => (
+          &lt;li key={todo.id}&gt;
+            &lt;input 
+              type="checkbox"
+              checked={todo.done}
+              onChange={() => toggleTodo(todo.id)}
+            /&gt;
+            &lt;span style={{ textDecoration: todo.done ? 'line-through' : 'none' }}&gt;
+              {todo.text}
+            &lt;/span&gt;
+            &lt;button onClick={() => deleteTodo(todo.id)}&gt;ลบ&lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>แบบฝึกหัดที่ 2: Dark Mode Toggle</h3>
+                <p>สร้าง Client Component ที่:</p>
+                <ul>
+                    <li>สลับระหว่าง Light/Dark Mode</li>
+                    <li>บันทึกค่าลง localStorage</li>
+                    <li>โหลดค่าจาก localStorage เมื่อเริ่มต้น</li>
+                </ul>
+                <button class="show-solution-btn" onclick="toggleSolution('solution2')">แสดงเฉลย</button>
+                <div id="solution2" class="solution" style="display: none;">
+                    <p class="hint">💡 ใช้ useEffect เพื่ออ่านค่าจาก localStorage และ useState เพื่อเก็บ state ของ theme</p>
+                    <p>ลองทำเองก่อนนะ! 😊</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <nav class="bottom-nav">
+            <a href="../index.html" class="nav-btn">← กลับหน้าหลัก</a>
+            <a href="diagrams-guide.html" class="nav-btn">📊 Visual Guide</a>
+            <a href="interactive-demo.html" class="nav-btn">ทดลองใช้งานจริง →</a>
+        </nav>
+
+        <footer>
+            <p>สร้างด้วย ❤️ สำหรับการเรียนรู้ Next.js Client Components</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'none') {
+                solution.style.display = 'block';
+            } else {
+                solution.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

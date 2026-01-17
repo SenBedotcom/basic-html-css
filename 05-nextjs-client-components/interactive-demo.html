@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Demo - Client Components</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .demo-section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .demo-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .demo-box h4 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .demo-controls {
+            margin: 15px 0;
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            font-size: 1em;
+            margin: 10px 0;
+            transition: border-color 0.3s;
+        }
+
+        .demo-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .demo-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .demo-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .demo-button:active {
+            transform: translateY(0);
+        }
+
+        .demo-button.secondary {
+            background: #6c757d;
+        }
+
+        .demo-button.secondary:hover {
+            background: #5a6268;
+        }
+
+        .demo-button.danger {
+            background: #dc3545;
+        }
+
+        .demo-button.danger:hover {
+            background: #c82333;
+        }
+
+        .demo-output {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            min-height: 50px;
+            border: 2px dashed #667eea;
+        }
+
+        .counter-display {
+            font-size: 3em;
+            text-align: center;
+            color: #667eea;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .todo-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #e9ecef;
+            transition: background 0.2s;
+        }
+
+        .todo-item:hover {
+            background: #f8f9fa;
+        }
+
+        .todo-item.completed {
+            opacity: 0.6;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+        }
+
+        .todo-text {
+            flex: 1;
+        }
+
+        .todo-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .timer-display {
+            font-size: 2em;
+            text-align: center;
+            color: #667eea;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .theme-demo {
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .theme-demo.light {
+            background: #ffffff;
+            color: #333333;
+        }
+
+        .theme-demo.dark {
+            background: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .search-results {
+            margin-top: 15px;
+        }
+
+        .search-result-item {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .demo-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 Interactive Demo</h1>
+            <p class="subtitle">ทดลองใช้งาน Client Component แบบ Interactive</p>
+        </header>
+
+        <nav class="breadcrumb">
+            <a href="../index.html">หน้าหลัก</a> → 
+            <a href="index.html">Client Components</a> →
+            <span>Interactive Demo</span>
+        </nav>
+
+        <div class="content-section">
+            <h2>🎯 ทดลองใช้งานจริง</h2>
+            <p>ด้านล่างนี้คือตัวอย่างการทำงานของ Client Component ต่างๆ ที่คุณสามารถทดลองได้เลย!</p>
+
+            <!-- Visual Guide -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 12px; margin: 30px 0; color: white;">
+                <h3 style="text-align: center; margin-bottom: 20px; color: white;">💡 วิธีการทำงานของ Demo</h3>
+                <svg width="100%" height="180" viewBox="0 0 800 180" style="max-width: 800px; margin: 0 auto; display: block;">
+                    <!-- User Action -->
+                    <rect x="50" y="30" width="150" height="120" fill="rgba(255,255,255,0.9)" stroke="white" stroke-width="2" rx="8"/>
+                    <text x="125" y="60" text-anchor="middle" font-size="16" font-weight="bold" fill="#667eea">1. User Action</text>
+                    <text x="125" y="85" text-anchor="middle" font-size="14" fill="#333">คลิกปุ่ม</text>
+                    <text x="125" y="105" text-anchor="middle" font-size="14" fill="#333">พิมพ์ข้อความ</text>
+                    <text x="125" y="125" text-anchor="middle" font-size="14" fill="#333">เลือกตัวเลือก</text>
+                    
+                    <!-- Arrow 1 -->
+                    <path d="M 200 90 L 240 90" stroke="white" stroke-width="3" marker-end="url(#arrow-white)"/>
+                    <text x="220" y="80" text-anchor="middle" font-size="12" fill="white" font-weight="bold">trigger</text>
+                    
+                    <!-- Event Handler -->
+                    <rect x="240" y="30" width="150" height="120" fill="rgba(255,255,255,0.9)" stroke="white" stroke-width="2" rx="8"/>
+                    <text x="315" y="60" text-anchor="middle" font-size="16" font-weight="bold" fill="#667eea">2. Event Handler</text>
+                    <text x="315" y="85" text-anchor="middle" font-size="14" fill="#333">onClick()</text>
+                    <text x="315" y="105" text-anchor="middle" font-size="14" fill="#333">onChange()</text>
+                    <text x="315" y="125" text-anchor="middle" font-size="14" fill="#333">onSubmit()</text>
+                    
+                    <!-- Arrow 2 -->
+                    <path d="M 390 90 L 430 90" stroke="white" stroke-width="3" marker-end="url(#arrow-white)"/>
+                    <text x="410" y="80" text-anchor="middle" font-size="12" fill="white" font-weight="bold">update</text>
+                    
+                    <!-- State Update -->
+                    <rect x="430" y="30" width="150" height="120" fill="rgba(255,255,255,0.9)" stroke="white" stroke-width="2" rx="8"/>
+                    <text x="505" y="60" text-anchor="middle" font-size="16" font-weight="bold" fill="#667eea">3. State Update</text>
+                    <text x="505" y="85" text-anchor="middle" font-size="14" fill="#333">setState()</text>
+                    <text x="505" y="105" text-anchor="middle" font-size="14" fill="#333">ข้อมูลเปลี่ยน</text>
+                    
+                    <!-- Arrow 3 -->
+                    <path d="M 580 90 L 620 90" stroke="white" stroke-width="3" marker-end="url(#arrow-white)"/>
+                    <text x="600" y="80" text-anchor="middle" font-size="12" fill="white" font-weight="bold">render</text>
+                    
+                    <!-- UI Re-render -->
+                    <rect x="620" y="30" width="150" height="120" fill="rgba(255,255,255,0.9)" stroke="white" stroke-width="2" rx="8"/>
+                    <text x="695" y="60" text-anchor="middle" font-size="16" font-weight="bold" fill="#667eea">4. UI Update</text>
+                    <text x="695" y="85" text-anchor="middle" font-size="14" fill="#333">แสดงผล</text>
+                    <text x="695" y="105" text-anchor="middle" font-size="14" fill="#333">ใหม่ ✨</text>
+                    
+                    <defs>
+                        <marker id="arrow-white" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="white" />
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="demo-container">
+                <!-- Demo 1: Counter -->
+                <div class="demo-box">
+                    <h4>1️⃣ Counter Component</h4>
+                    <div class="counter-display" id="counter">0</div>
+                    <div class="demo-controls">
+                        <button class="demo-button" onclick="increment()">➕ เพิ่ม</button>
+                        <button class="demo-button" onclick="decrement()">➖ ลด</button>
+                        <button class="demo-button secondary" onclick="reset()">🔄 Reset</button>
+                    </div>
+                    <div class="highlight-box success" style="margin-top: 15px;">
+                        <strong>💡 Concept:</strong> ใช้ useState เพื่อเก็บค่า count
+                    </div>
+                </div>
+
+                <!-- Demo 2: Timer -->
+                <div class="demo-box">
+                    <h4>2️⃣ Timer Component</h4>
+                    <div class="timer-display" id="timer">00:00</div>
+                    <div class="demo-controls">
+                        <button class="demo-button" onclick="startTimer()">▶️ เริ่ม</button>
+                        <button class="demo-button danger" onclick="stopTimer()">⏸️ หยุด</button>
+                        <button class="demo-button secondary" onclick="resetTimer()">🔄 Reset</button>
+                    </div>
+                    <div class="highlight-box success" style="margin-top: 15px;">
+                        <strong>💡 Concept:</strong> ใช้ useEffect + setInterval
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3>3️⃣ Todo List Component</h3>
+                <div class="demo-controls">
+                    <input 
+                        type="text" 
+                        id="todoInput" 
+                        class="demo-input" 
+                        placeholder="เพิ่มสิ่งที่ต้องทำ..."
+                        onkeypress="if(event.key==='Enter') addTodo()"
+                    >
+                    <button class="demo-button" onclick="addTodo()">➕ เพิ่ม Todo</button>
+                </div>
+                <div id="todoList" class="demo-output">
+                    <p style="text-align: center; color: #999;">ยังไม่มี Todo</p>
+                </div>
+                <div class="highlight-box success">
+                    <strong>💡 Concept:</strong> ใช้ useState สำหรับ array of todos และ map เพื่อแสดงผล
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <h3>4️⃣ Search Component</h3>
+                <div class="demo-controls">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="demo-input" 
+                        placeholder="ค้นหาผลไม้..."
+                        oninput="handleSearch()"
+                    >
+                </div>
+                <div id="searchResults" class="search-results"></div>
+                <div class="highlight-box success">
+                    <strong>💡 Concept:</strong> Real-time filtering ด้วย onChange event
+                </div>
+            </div>
+
+            <div class="demo-container">
+                <!-- Demo 5: Theme Toggle -->
+                <div class="demo-box">
+                    <h4>5️⃣ Theme Toggle</h4>
+                    <div id="themeDemo" class="theme-demo light">
+                        <h3>🎨 Theme Demo</h3>
+                        <p>นี่คือตัวอย่าง Theme Switcher</p>
+                        <button class="demo-button" onclick="toggleTheme()">
+                            🌓 สลับ Theme
+                        </button>
+                    </div>
+                    <div class="highlight-box success" style="margin-top: 15px;">
+                        <strong>💡 Concept:</strong> Toggle state + localStorage
+                    </div>
+                </div>
+
+                <!-- Demo 6: Form -->
+                <div class="demo-box">
+                    <h4>6️⃣ Form Component</h4>
+                    <input 
+                        type="text" 
+                        id="nameInput" 
+                        class="demo-input" 
+                        placeholder="ชื่อของคุณ"
+                    >
+                    <input 
+                        type="email" 
+                        id="emailInput" 
+                        class="demo-input" 
+                        placeholder="อีเมล"
+                    >
+                    <button class="demo-button" onclick="submitForm()">📤 ส่ง</button>
+                    <div id="formOutput" class="demo-output" style="display: none;"></div>
+                    <div class="highlight-box success" style="margin-top: 15px;">
+                        <strong>💡 Concept:</strong> Form handling ด้วย useState
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual Component Architecture -->
+        <div class="content-section" style="background: #f8f9fa;">
+            <h2 style="text-align: center;">🏗️ สถาปัตยกรรม Component</h2>
+            <svg width="100%" height="300" viewBox="0 0 900 300" style="max-width: 900px; margin: 20px auto; display: block;">
+                <!-- Counter Component -->
+                <rect x="50" y="30" width="180" height="240" fill="#fff" stroke="#667eea" stroke-width="2" rx="10" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));"/>
+                <rect x="50" y="30" width="180" height="40" fill="#667eea" rx="10"/>
+                <text x="140" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Counter</text>
+                
+                <text x="70" y="90" font-size="12" fill="#333" font-weight="bold">State:</text>
+                <text x="70" y="110" font-size="11" fill="#666">count: number</text>
+                
+                <text x="70" y="140" font-size="12" fill="#333" font-weight="bold">Methods:</text>
+                <text x="70" y="160" font-size="11" fill="#666">increment()</text>
+                <text x="70" y="175" font-size="11" fill="#666">decrement()</text>
+                <text x="70" y="190" font-size="11" fill="#666">reset()</text>
+                
+                <text x="70" y="220" font-size="12" fill="#333" font-weight="bold">UI:</text>
+                <text x="70" y="240" font-size="11" fill="#666">Display + Buttons</text>
+                
+                <!-- Todo Component -->
+                <rect x="260" y="30" width="180" height="240" fill="#fff" stroke="#9c27b0" stroke-width="2" rx="10" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));"/>
+                <rect x="260" y="30" width="180" height="40" fill="#9c27b0" rx="10"/>
+                <text x="350" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="white">TodoList</text>
+                
+                <text x="280" y="90" font-size="12" fill="#333" font-weight="bold">State:</text>
+                <text x="280" y="110" font-size="11" fill="#666">todos: Todo[]</text>
+                <text x="280" y="125" font-size="11" fill="#666">input: string</text>
+                
+                <text x="280" y="155" font-size="12" fill="#333" font-weight="bold">Methods:</text>
+                <text x="280" y="175" font-size="11" fill="#666">addTodo()</text>
+                <text x="280" y="190" font-size="11" fill="#666">toggleTodo()</text>
+                <text x="280" y="205" font-size="11" fill="#666">deleteTodo()</text>
+                
+                <text x="280" y="235" font-size="12" fill="#333" font-weight="bold">UI:</text>
+                <text x="280" y="250" font-size="11" fill="#666">Input + List</text>
+                
+                <!-- Timer Component -->
+                <rect x="470" y="30" width="180" height="240" fill="#fff" stroke="#ff9800" stroke-width="2" rx="10" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));"/>
+                <rect x="470" y="30" width="180" height="40" fill="#ff9800" rx="10"/>
+                <text x="560" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Timer</text>
+                
+                <text x="490" y="90" font-size="12" fill="#333" font-weight="bold">State:</text>
+                <text x="490" y="110" font-size="11" fill="#666">seconds: number</text>
+                <text x="490" y="125" font-size="11" fill="#666">isRunning: bool</text>
+                
+                <text x="490" y="155" font-size="12" fill="#333" font-weight="bold">Effects:</text>
+                <text x="490" y="175" font-size="11" fill="#666">useEffect()</text>
+                <text x="490" y="190" font-size="11" fill="#666">setInterval()</text>
+                
+                <text x="490" y="220" font-size="12" fill="#333" font-weight="bold">Methods:</text>
+                <text x="490" y="240" font-size="11" fill="#666">start/stop/reset</text>
+                
+                <!-- Theme Component -->
+                <rect x="680" y="30" width="180" height="240" fill="#fff" stroke="#4caf50" stroke-width="2" rx="10" style="filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));"/>
+                <rect x="680" y="30" width="180" height="40" fill="#4caf50" rx="10"/>
+                <text x="770" y="55" text-anchor="middle" font-size="14" font-weight="bold" fill="white">ThemeToggle</text>
+                
+                <text x="700" y="90" font-size="12" fill="#333" font-weight="bold">State:</text>
+                <text x="700" y="110" font-size="11" fill="#666">theme: string</text>
+                
+                <text x="700" y="140" font-size="12" fill="#333" font-weight="bold">Effects:</text>
+                <text x="700" y="160" font-size="11" fill="#666">useEffect()</text>
+                <text x="700" y="175" font-size="11" fill="#666">localStorage</text>
+                
+                <text x="700" y="205" font-size="12" fill="#333" font-weight="bold">Methods:</text>
+                <text x="700" y="225" font-size="11" fill="#666">toggleTheme()</text>
+                
+                <text x="700" y="255" font-size="12" fill="#333" font-weight="bold">Persist:</text>
+                <text x="700" y="270" font-size="11" fill="#666">localStorage ✓</text>
+            </svg>
+        </div>
+
+        <!-- Code Examples Section -->
+        <div class="content-section">
+            <h2>📝 โค้ดที่ใช้ใน Demo</h2>
+            <p>ตัวอย่างโค้ดสำหรับ Demo ข้างต้น (เวอร์ชั่น Next.js):</p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="filename">components/Counter.tsx</span>
+                </div>
+                <pre><code>'use client'
+
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+
+  const increment = () => setCount(count + 1)
+  const decrement = () => setCount(count - 1)
+  const reset = () => setCount(0)
+
+  return (
+    &lt;div&gt;
+      &lt;div className="counter-display"&gt;{count}&lt;/div&gt;
+      &lt;button onClick={increment}&gt;➕ เพิ่ม&lt;/button&gt;
+      &lt;button onClick={decrement}&gt;➖ ลด&lt;/button&gt;
+      &lt;button onClick={reset}&gt;🔄 Reset&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+            </div>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="filename">components/TodoList.tsx</span>
+                </div>
+                <pre><code>'use client'
+
+import { useState } from 'react'
+
+export default function TodoList() {
+  const [todos, setTodos] = useState([])
+  const [input, setInput] = useState('')
+
+  const addTodo = () => {
+    if (input.trim()) {
+      setTodos([...todos, {
+        id: Date.now(),
+        text: input,
+        completed: false
+      }])
+      setInput('')
+    }
+  }
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ))
+  }
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+      /&gt;
+      &lt;button onClick={addTodo}&gt;เพิ่ม&lt;/button&gt;
+      
+      {todos.map(todo => (
+        &lt;div key={todo.id}&gt;
+          &lt;input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => toggleTodo(todo.id)}
+          /&gt;
+          &lt;span&gt;{todo.text}&lt;/span&gt;
+          &lt;button onClick={() => deleteTodo(todo.id)}&gt;ลบ&lt;/button&gt;
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  )
+}</code></pre>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-btn">← กลับไปบทเรียน</a>
+            <a href="diagrams-guide.html" class="nav-btn">📊 Visual Guide</a>
+            <a href="../index.html" class="nav-btn">กลับหน้าหลัก →</a>
+        </nav>
+
+        <footer>
+            <p>ทดลองเล่นกับ Demo แล้วนำไปประยุกต์ใช้ใน Next.js ของคุณเอง! 🚀</p>
+        </footer>
+    </div>
+
+    <script>
+        // Counter Demo
+        let count = 0;
+        function increment() {
+            count++;
+            document.getElementById('counter').textContent = count;
+        }
+        function decrement() {
+            count--;
+            document.getElementById('counter').textContent = count;
+        }
+        function reset() {
+            count = 0;
+            document.getElementById('counter').textContent = count;
+        }
+
+        // Timer Demo
+        let seconds = 0;
+        let timerInterval = null;
+        function startTimer() {
+            if (!timerInterval) {
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    updateTimerDisplay();
+                }, 1000);
+            }
+        }
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+        function resetTimer() {
+            stopTimer();
+            seconds = 0;
+            updateTimerDisplay();
+        }
+        function updateTimerDisplay() {
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${mins}:${secs}`;
+        }
+
+        // Todo Demo
+        let todos = [];
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const text = input.value.trim();
+            if (text) {
+                todos.push({
+                    id: Date.now(),
+                    text: text,
+                    completed: false
+                });
+                input.value = '';
+                renderTodos();
+            }
+        }
+        function toggleTodo(id) {
+            todos = todos.map(todo =>
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            );
+            renderTodos();
+        }
+        function deleteTodo(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            renderTodos();
+        }
+        function renderTodos() {
+            const container = document.getElementById('todoList');
+            if (todos.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #999;">ยังไม่มี Todo</p>';
+                return;
+            }
+            container.innerHTML = todos.map(todo => `
+                <div class="todo-item ${todo.completed ? 'completed' : ''}">
+                    <input 
+                        type="checkbox" 
+                        class="todo-checkbox"
+                        ${todo.completed ? 'checked' : ''}
+                        onchange="toggleTodo(${todo.id})"
+                    >
+                    <span class="todo-text">${todo.text}</span>
+                    <button class="demo-button danger" onclick="deleteTodo(${todo.id})">🗑️</button>
+                </div>
+            `).join('');
+        }
+
+        // Search Demo
+        const fruits = [
+            'แอปเปิ้ล', 'กล้วย', 'ส้ม', 'มะม่วง', 'สตรอว์เบอร์รี',
+            'องุ่น', 'แตงโม', 'สับปะรด', 'มะละกอ', 'ทุเรียน'
+        ];
+        function handleSearch() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const results = fruits.filter(fruit => fruit.toLowerCase().includes(input));
+            const container = document.getElementById('searchResults');
+            
+            if (!input) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            if (results.length === 0) {
+                container.innerHTML = '<p style="color: #999;">ไม่พบผลลัพธ์</p>';
+                return;
+            }
+            
+            container.innerHTML = results.map(fruit => 
+                `<div class="search-result-item">${fruit}</div>`
+            ).join('');
+        }
+
+        // Theme Toggle Demo
+        let currentTheme = 'light';
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            const themeDemo = document.getElementById('themeDemo');
+            themeDemo.className = `theme-demo ${currentTheme}`;
+            // จำลองการบันทึกลง localStorage
+            localStorage.setItem('theme', currentTheme);
+        }
+        // โหลด theme จาก localStorage
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                currentTheme = savedTheme;
+                document.getElementById('themeDemo').className = `theme-demo ${currentTheme}`;
+            }
+        });
+
+        // Form Demo
+        function submitForm() {
+            const name = document.getElementById('nameInput').value;
+            const email = document.getElementById('emailInput').value;
+            const output = document.getElementById('formOutput');
+            
+            if (name && email) {
+                output.style.display = 'block';
+                output.innerHTML = `
+                    <h4>✅ ส่งข้อมูลสำเร็จ!</h4>
+                    <p><strong>ชื่อ:</strong> ${name}</p>
+                    <p><strong>อีเมล:</strong> ${email}</p>
+                `;
+                document.getElementById('nameInput').value = '';
+                document.getElementById('emailInput').value = '';
+            } else {
+                alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+            }
+        }
+    </script>
+</body>
+</html>

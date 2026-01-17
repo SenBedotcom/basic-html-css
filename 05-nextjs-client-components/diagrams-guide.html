@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Guide - Client Components Diagrams</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .diagram-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .diagram-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .diagram-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .diagram-card svg {
+            width: 100%;
+            height: auto;
+        }
+        
+        .legend {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            margin: 10px 15px;
+        }
+        
+        .legend-box {
+            width: 30px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Visual Guide</h1>
+            <p class="subtitle">Diagrams สำหรับทำความเข้าใจ Client Components</p>
+        </header>
+
+        <nav class="breadcrumb">
+            <a href="../index.html">หน้าหลัก</a> → 
+            <a href="index.html">Client Components</a> →
+            <span>Visual Guide</span>
+        </nav>
+
+        <div class="content-section">
+            <h2>🎨 ภาพรวมการทำงาน</h2>
+            <p>ชุด Diagrams ที่แสดงการทำงานของ Client Components แบบละเอียด</p>
+
+            <!-- Legend -->
+            <div class="legend">
+                <h3 style="margin-bottom: 15px;">📖 สัญลักษณ์ที่ใช้</h3>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #e3f2fd; border: 2px solid #2196f3;"></div>
+                    <span>Server Component</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #ffebee; border: 2px solid #e74c3c;"></div>
+                    <span>Client Component</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #e8f5e9; border: 2px solid #4caf50;"></div>
+                    <span>State/Data</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #fff3e0; border: 2px solid #ff9800;"></div>
+                    <span>Browser API</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box" style="background: #f3e5f5; border: 2px solid #9c27b0;"></div>
+                    <span>User Action</span>
+                </div>
+            </div>
+
+            <div class="diagram-showcase">
+                
+                <!-- Diagram 1: Basic Component Lifecycle -->
+                <div class="diagram-card">
+                    <h3>1. Component Lifecycle</h3>
+                    <svg viewBox="0 0 300 400">
+                        <defs>
+                            <marker id="lifecycle-arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
+                            </marker>
+                            <marker id="lifecycle-arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#2196f3" />
+                            </marker>
+                            <marker id="lifecycle-arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#ff9800" />
+                            </marker>
+                        </defs>
+                        
+                        <rect x="50" y="30" width="200" height="60" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="8"/>
+                        <text x="150" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#4caf50">Component Mount</text>
+                        
+                        <path d="M 150 90 L 150 120" stroke="#4caf50" stroke-width="2" marker-end="url(#lifecycle-arrow1)" fill="none"/>
+                        
+                        <rect x="50" y="120" width="200" height="60" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="8"/>
+                        <text x="150" y="155" text-anchor="middle" font-size="14" font-weight="bold" fill="#2196f3">Initial Render</text>
+                        
+                        <path d="M 150 180 L 150 210" stroke="#2196f3" stroke-width="2" marker-end="url(#lifecycle-arrow2)" fill="none"/>
+                        
+                        <rect x="50" y="210" width="200" height="60" fill="#fff3e0" stroke="#ff9800" stroke-width="2" rx="8"/>
+                        <text x="150" y="245" text-anchor="middle" font-size="14" font-weight="bold" fill="#ff9800">User Interaction</text>
+                        
+                        <path d="M 250 240 L 280 240 L 280 330 L 150 330 L 150 300" stroke="#ff9800" stroke-width="2" marker-end="url(#lifecycle-arrow3)" fill="none"/>
+                        
+                        <rect x="50" y="300" width="200" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="8"/>
+                        <text x="150" y="325" text-anchor="middle" font-size="14" font-weight="bold" fill="#9c27b0">State Update</text>
+                        <text x="150" y="345" text-anchor="middle" font-size="12" fill="#666">Re-render</text>
+                    </svg>
+                </div>
+
+                <!-- Diagram 2: useState Flow -->
+                <div class="diagram-card">
+                    <h3>2. useState Data Flow</h3>
+                    <svg viewBox="0 0 300 350">
+                        <defs>
+                            <marker id="useState-arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#2196f3" />
+                            </marker>
+                            <marker id="useState-arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#ff9800" />
+                            </marker>
+                            <marker id="useState-arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
+                            </marker>
+                        </defs>
+                        
+                        <circle cx="150" cy="60" r="40" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+                        <text x="150" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#2196f3">Initial</text>
+                        <text x="150" y="70" text-anchor="middle" font-size="14" fill="#333">State</text>
+                        
+                        <path d="M 150 100 L 150 140" stroke="#2196f3" stroke-width="2" marker-end="url(#useState-arrow1)" fill="none"/>
+                        <text x="170" y="125" font-size="11" fill="#2196f3">render</text>
+                        
+                        <rect x="75" y="140" width="150" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="8"/>
+                        <text x="150" y="170" text-anchor="middle" font-size="13" font-weight="bold" fill="#9c27b0">Component UI</text>
+                        
+                        <path d="M 225 165 L 260 165" stroke="#9c27b0" stroke-width="2" fill="none"/>
+                        <circle cx="270" cy="165" r="5" fill="#9c27b0"/>
+                        
+                        <text x="240" y="155" font-size="10" fill="#9c27b0">onClick</text>
+                        
+                        <path d="M 260 175 L 260 240 L 150 240 L 150 270" stroke="#ff9800" stroke-width="2" marker-end="url(#useState-arrow2)" fill="none"/>
+                        <text x="200" y="260" font-size="11" fill="#ff9800">setState()</text>
+                        
+                        <circle cx="150" cy="300" r="40" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+                        <text x="150" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#4caf50">New</text>
+                        <text x="150" y="310" text-anchor="middle" font-size="14" fill="#333">State</text>
+                        
+                        <path d="M 110 290 L 40 200 L 75 165" stroke="#4caf50" stroke-width="2" marker-end="url(#useState-arrow3)" stroke-dasharray="4,4" fill="none"/>
+                        <text x="50" y="240" font-size="11" fill="#4caf50">re-render</text>
+                    </svg>
+                </div>
+
+                <!-- Diagram 3: Event Handling -->
+                <div class="diagram-card">
+                    <h3>3. Event Handling Flow</h3>
+                    <svg viewBox="0 0 300 300">
+                        <defs>
+                            <marker id="event-arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#ff9800" />
+                            </marker>
+                            <marker id="event-arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#9c27b0" />
+                            </marker>
+                        </defs>
+                        
+                        <circle cx="150" cy="50" r="30" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+                        <text x="150" y="55" text-anchor="middle" font-size="24">👤</text>
+                        <text x="150" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#ff9800">User</text>
+                        
+                        <path d="M 150 80 L 150 130" stroke="#ff9800" stroke-width="2" marker-end="url(#event-arrow1)" fill="none"/>
+                        <text x="170" y="110" font-size="11" fill="#ff9800">action</text>
+                        
+                        <rect x="75" y="130" width="150" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="8"/>
+                        <text x="150" y="150" text-anchor="middle" font-size="12" fill="#9c27b0">Event Handler</text>
+                        <text x="150" y="167" text-anchor="middle" font-size="11" fill="#666">onClick/onChange</text>
+                        
+                        <path d="M 150 180 L 150 220" stroke="#9c27b0" stroke-width="2" marker-end="url(#event-arrow2)" fill="none"/>
+                        <text x="170" y="205" font-size="11" fill="#9c27b0">trigger</text>
+                        
+                        <rect x="75" y="220" width="150" height="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="8"/>
+                        <text x="150" y="240" text-anchor="middle" font-size="12" fill="#4caf50">Update State</text>
+                        <text x="150" y="257" text-anchor="middle" font-size="11" fill="#666">setState(newValue)</text>
+                    </svg>
+                </div>
+
+                <!-- Diagram 4: Component Composition -->
+                <div class="diagram-card">
+                    <h3>4. Component Composition</h3>
+                    <svg viewBox="0 0 300 320">
+                        <rect x="30" y="30" width="240" height="270" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" rx="10"/>
+                        <text x="150" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#2196f3">Parent (Server)</text>
+                        
+                        <rect x="50" y="80" width="200" height="80" fill="#ffebee" stroke="#e74c3c" stroke-width="2" rx="8"/>
+                        <text x="150" y="100" text-anchor="middle" font-size="12" font-weight="bold" fill="#e74c3c">'use client'</text>
+                        <text x="150" y="120" text-anchor="middle" font-size="11" fill="#333">Child Component 1</text>
+                        <text x="150" y="140" text-anchor="middle" font-size="10" fill="#666">(Interactive)</text>
+                        
+                        <rect x="50" y="180" width="90" height="100" fill="#ffebee" stroke="#e74c3c" stroke-width="2" rx="8"/>
+                        <text x="95" y="200" text-anchor="middle" font-size="11" font-weight="bold" fill="#e74c3c">'use client'</text>
+                        <text x="95" y="220" text-anchor="middle" font-size="10" fill="#333">Child 2</text>
+                        <text x="95" y="240" text-anchor="middle" font-size="9" fill="#666">Counter</text>
+                        
+                        <rect x="160" y="180" width="90" height="100" fill="#ffebee" stroke="#e74c3c" stroke-width="2" rx="8"/>
+                        <text x="205" y="200" text-anchor="middle" font-size="11" font-weight="bold" fill="#e74c3c">'use client'</text>
+                        <text x="205" y="220" text-anchor="middle" font-size="10" fill="#333">Child 3</text>
+                        <text x="205" y="240" text-anchor="middle" font-size="9" fill="#666">Form</text>
+                        
+                        <path d="M 150 60 L 150 75" stroke="#2196f3" stroke-width="1" stroke-dasharray="2,2"/>
+                        <path d="M 150 160 L 95 175" stroke="#2196f3" stroke-width="1" stroke-dasharray="2,2"/>
+                        <path d="M 150 160 L 205 175" stroke="#2196f3" stroke-width="1" stroke-dasharray="2,2"/>
+                    </svg>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="content-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; border-bottom-color: white;">💡 เคล็ดลับการอ่าน Diagram</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 10px; margin-top: 20px;">
+                <ul style="line-height: 2; font-size: 1.1em;">
+                    <li>➡️ <strong>ลูกศร</strong> แสดงทิศทางการไหลของข้อมูล (Data Flow)</li>
+                    <li>🔄 <strong>ลูกศรวนกลับ</strong> แสดงการ Re-render หรือ Cycle</li>
+                    <li>📦 <strong>กล่องสี่เหลี่ยม</strong> แสดง Component หรือ State</li>
+                    <li>⭕ <strong>วงกลม</strong> แสดง State, User หรือ Action Point</li>
+                    <li>- - - <strong>เส้นประ</strong> แสดงความสัมพันธ์หรือการเชื่อมต่อ</li>
+                </ul>
+            </div>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-btn">← กลับไปบทเรียน</a>
+            <a href="interactive-demo.html" class="nav-btn">ทดลองใช้งาน →</a>
+        </nav>
+
+        <footer>
+            <p>Visual Diagrams สร้างด้วย SVG เพื่อการเรียนรู้ที่ดีขึ้น 🎨</p>
+        </footer>
+    </div>
+</body>
+</html>
